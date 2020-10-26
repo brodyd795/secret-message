@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 const styles = {
 	wrapper: {
-		backgroundColor: "blue",
 		display: "flex",
 		flexDirection: "column",
 		width: "200px",
