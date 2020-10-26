@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import fetch from "isomorphic-unfetch";
 
 const styles = {
 	wrapper: {
@@ -23,9 +24,17 @@ const Home = () => {
 		setMessage(e.target.value);
 	};
 
-	const handleSave = (e) => {
+	const handleSave = async (e) => {
 		e.preventDefault();
 		console.log({ email, message });
+
+		await fetch(`/api`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ email, message }),
+		});
 	};
 
 	return (
