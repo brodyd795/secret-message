@@ -26,35 +26,41 @@ const Home = () => {
 
 	const handleSave = async (e) => {
 		e.preventDefault();
-		console.log({ email, message });
 
 		await fetch(`/api`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ email, message }),
+			body: JSON.stringify({
+				email,
+				message
+			}),
 		});
 	};
 
 	return (
 		<div style={styles.wrapper}>
-			<form onSubmit={handleSave}>
+			<form>
+				<label htmlFor={'email'}>email</label>
 				<input
+					id={'email'}
 					type={"email"}
 					value={email}
 					placeholder={"Enter recipient email address"}
 					onChange={handleEmailChange}
 					style={styles.formElement}
 				/>
+				<label htmlFor={'message'}>message</label>
 				<input
+					id={'message'}
 					type={"text"}
 					value={message}
 					placeholder={"Enter secret message"}
 					onChange={handleMessageChange}
 					style={styles.formElement}
 				/>
-				<input type={"submit"} value={"save"} />
+				<button type={"submit"} onClick={handleSave}>{'Save'}</button>
 			</form>
 		</div>
 	);
