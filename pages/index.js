@@ -15,6 +15,8 @@ const styles = {
 const Home = () => {
 	const [email, setEmail] = useState("");
 	const [message, setMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState("");
+
 
 	const handleEmailChange = (e) => {
 		setEmail(e.target.value);
@@ -27,7 +29,7 @@ const Home = () => {
 	const handleSave = async (e) => {
 		e.preventDefault();
 
-		await fetch(`/api`, {
+		const result = await fetch(`/api/controllers`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -37,10 +39,22 @@ const Home = () => {
 				message
 			}),
 		});
+
+		const json = await result.json();
+		console.log('json', json)
+
+		if (result.status === 200) {
+			setSuccessMessage('Success!')
+		} else {
+			setSuccessMessage('FAIL')
+		}
 	};
 
 	return (
 		<div style={styles.wrapper}>
+			<div>
+				<p>{successMessage}</p>
+			</div>
 			<form>
 				<label htmlFor={'email'}>email</label>
 				<input
