@@ -16,6 +16,7 @@ const Home = () => {
 	const [email, setEmail] = useState("");
 	const [message, setMessage] = useState("");
 	const [successMessage, setSuccessMessage] = useState("");
+	const [isSelfDestructChecked, setIsSelfDestructChecked] = useState(true);
 
 
 	const handleEmailChange = (e) => {
@@ -36,7 +37,8 @@ const Home = () => {
 			},
 			body: JSON.stringify({
 				email,
-				message
+				message,
+				isSelfDestructChecked
 			}),
 		});
 
@@ -74,6 +76,8 @@ const Home = () => {
 					onChange={handleMessageChange}
 					style={styles.formElement}
 				/>
+				<label htmlFor={'self-destruct'}>Self destruct this message after 15 minutes?</label>
+				<input type={'checkbox'} name={'self-destruct'} checked={isSelfDestructChecked} onChange={() => setIsSelfDestructChecked(!isSelfDestructChecked)} />
 				<button type={"submit"} onClick={handleSave}>{'Save'}</button>
 			</form>
 		</div>

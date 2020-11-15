@@ -5,25 +5,23 @@ import sendEmailService from '../services/send-email-service';
 
 export default async (req, res) => {
 	try {
-		const { email, message } = req.body;
+		const { email, message, isSelfDestructChecked } = req.body;
 
 		const guid = await postMessageService({
 			email,
-			message
+			message,
+			isSelfDestructChecked
 		});
 
 		if (uuidValidate(guid)) {
-			console.log('guid', guid);
-			const link = `https://secret-message.dingel.dev/view?id=${guid}`;
-			console.log('link', link);
+			const link = `http://localhost:3000/view?id=${guid}`;
 
-			// await sendEmailService(email, link);
+			await sendEmailService(email, link, isSelfDestructChecked);
 
 			res.status(200).json({ message: 'Success' });
 		} else {
 			res.status(500).json({
 				message: 'Something went wrong',
-				response
 			});
 		}
 	} catch (error) {
