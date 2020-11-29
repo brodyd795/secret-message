@@ -5,3 +5,8 @@
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';
+@layer utilities {
+	.trans {
+		transition: 0.5s;
+	}
+}
