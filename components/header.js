@@ -13,7 +13,7 @@ const AOld = ({children, href}) =>
 const A = ({children, href}) =>
     <Link href={href}>
         <a
-            className={'p-3 uppercase hover:bg-blue-500 w-full text-center'}
+            className={'p-3 uppercase hover:bg-blue-500 w-full md:w-auto md:inline-block text-center'}
         >
             {children}
         </a>
@@ -23,13 +23,13 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className={'h-screen w-full flex flex-col fixed'}>
-            <div className={'bg-gray-500 w-full flex justify-between items-center p-2'}>
+        <header className={'h-screen md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between md:bg-gray-500'}>
+            <div className={'bg-gray-500 w-full md:w-auto flex justify-between items-center p-2'}>
                 <span>HOME</span>
                 <button
                     type={'button'}
                     onClick={() => setIsOpen(!isOpen)}
-                    className={'block hover:text-white focus:text-white focus:outline-none p-3'}
+                    className={'block hover:text-white focus:text-white focus:outline-none p-3 md:hidden'}
                     style={{color: 'blue'}}
                 >
                     <svg
@@ -53,13 +53,20 @@ const Header = () => {
             </div>
             <div
                 style={{transition: '0.5s'}}
-                className={`bg-gray-500 flex flex-grow ${isOpen ? 'w-full' : 'w-0'} z-10 left-0 overflow-x-hidden`}
+                className={`bg-gray-500 flex flex-grow ${isOpen ? 'w-full' : 'w-0'} z-10 left-0 overflow-x-hidden md:hidden`}
             >
                 <div className={'w-full flex flex-col items-center justify-center'}>
                     <A href={'#'}>{'Send message'}</A>
                     <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
                     <A href={'#'}>{'About'}</A>
                 </div>
+            </div>
+            <div
+                className={`hidden md:block bg-gray-500`}
+            >
+                <A href={'#'}>{'Send message'}</A>
+                <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
+                <A href={'#'}>{'About'}</A>
             </div>
         </header>
         // <header className={`${isOpen && 'h-screen'} sm:h-auto md:flex sm:justify-between bg-red-500`}>
