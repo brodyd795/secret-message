@@ -1,10 +1,19 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 
-const A = ({children, href}) =>
+const AOld = ({children, href}) =>
     <Link href={href}>
         <a
             className={'p-3 uppercase w-full md:w-auto flex justify-center md:inline-block hover:bg-gray-800'}
+        >
+            {children}
+        </a>
+    </Link>;
+
+const A = ({children, href}) =>
+    <Link href={href}>
+        <a
+            className={'p-3 uppercase hover:bg-blue-500 w-full text-center'}
         >
             {children}
         </a>
@@ -15,13 +24,41 @@ const Header = () => {
 
     return (
         <header className={'h-screen w-full flex flex-col fixed'}>
-            <div className={'w-full bg-blue-500 flex justify-between'}>
+            <div className={'bg-gray-500 w-full flex justify-between items-center p-2'}>
                 <span>HOME</span>
-                <button onClick={() => setIsOpen(!isOpen)}>Toggle</button>
+                <button
+                    type={'button'}
+                    onClick={() => setIsOpen(!isOpen)}
+                    className={'block hover:text-white focus:text-white focus:outline-none p-3'}
+                    style={{color: 'blue'}}
+                >
+                    <svg
+                        className="h-6 w-6 fill-current"
+                        viewBox="0 0 24 24"
+                    >
+                        {isOpen ?
+                            <path
+                                className={isOpen ? 'block' : 'hidden'}
+                                fillRule="evenodd"
+                                d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"
+                            />
+                            :
+                            <path
+                                className={!isOpen ? 'block' : 'hidden'}
+                                fillRule="evenodd"
+                                d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+                            />}
+                    </svg>
+                </button>
             </div>
-            <div style={{transition: '0.5s'}} className={`bg-green-500 flex flex-grow ${isOpen ? 'w-full' : 'w-0'} z-10 left-0 overflow-x-hidden`}>
-                <div className={'relative w-full'}>
-                    <span>Content</span>
+            <div
+                style={{transition: '0.5s'}}
+                className={`bg-gray-500 flex flex-grow ${isOpen ? 'w-full' : 'w-0'} z-10 left-0 overflow-x-hidden`}
+            >
+                <div className={'w-full flex flex-col items-center justify-center'}>
+                    <A href={'#'}>{'Send message'}</A>
+                    <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
+                    <A href={'#'}>{'About'}</A>
                 </div>
             </div>
         </header>
