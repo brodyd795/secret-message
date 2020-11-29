@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 
+import {theme} from '../tailwind.config';
+
 const A = ({children, href}) =>
     <Link href={href}>
         <a
-            className={'p-3 uppercase hover:bg-blue-500 w-full md:w-auto md:inline-block text-center'}
+            className={'p-3 uppercase w-full md:w-auto md:inline-block text-center'}
         >
             {children}
         </a>
@@ -14,14 +16,19 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className={'h-screen md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between md:bg-gray-500'}>
-            <div className={'bg-gray-500 w-full md:w-auto flex justify-between items-center p-2'}>
+        <header
+            className={'h-screen md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between'}
+        >
+            <div
+                className={'w-full md:w-auto flex justify-between items-center p-2'}
+                style={{backgroundImage: `url(${require('../public/background.svg')})`}}
+            >
                 <span>HOME</span>
                 <button
                     type={'button'}
                     onClick={() => setIsOpen(!isOpen)}
-                    className={'block hover:text-white focus:text-white focus:outline-none p-3 md:hidden'}
-                    style={{color: 'blue'}}
+                    className={'block hover:text-white focus:text-white focus:outline-none active:bg-transparent p-3 md:hidden'}
+                    style={{color: theme.extend.colors.gold.DEFAULT}}
                 >
                     <svg
                         className="h-6 w-6 fill-current"
@@ -40,16 +47,19 @@ const Header = () => {
                 </button>
             </div>
             <div
-                className={`trans bg-gray-500 flex flex-grow ${isOpen ? 'w-full' : 'w-0'} z-10 left-0 overflow-x-hidden md:hidden`}
+                className={`trans flex flex-grow ${isOpen ? 'w-full' : 'w-0'} z-10 left-0 overflow-x-hidden md:hidden`}
             >
-                <div className={'w-full flex flex-col items-center justify-center'}>
+                <div
+                    className={'w-full flex flex-col items-center justify-center'}
+                    style={{backgroundImage: `url(${require('../public/background.svg')})`}}
+                >
                     <A href={'#'}>{'Send message'}</A>
                     <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
                     <A href={'#'}>{'About'}</A>
                 </div>
             </div>
             <div
-                className={'hidden md:block bg-gray-500'}
+                className={'hidden md:block'}
             >
                 <A href={'#'}>{'Send message'}</A>
                 <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>

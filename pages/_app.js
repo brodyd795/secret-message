@@ -1,6 +1,8 @@
 import React from 'react';
 import '../styles/index.css';
 
+import {theme} from '../tailwind.config';
+
 export default ({Component, pageProps}) =>
     <>
         <Component {...pageProps} />
@@ -14,7 +16,7 @@ export default ({Component, pageProps}) =>
                 }
                 
                 body {
-                    color: red;
+                    color: ${theme.extend.colors.gold.DEFAULT};
                     font-size: 16px;
                     background-image: url(${require('../public/background.svg')});
                 }
@@ -26,7 +28,7 @@ export default ({Component, pageProps}) =>
                 }
                 
                 a {
-                    color: blue;
+                    color: ${theme.extend.colors.gold.DEFAULT};
                     cursor: pointer;
                 }
                 

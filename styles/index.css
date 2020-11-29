@@ -9,4 +9,8 @@
 	.trans {
 		transition: 0.5s;
 	}
+	,
+	.vh-50 {
+		height: 50vh;
+	}
 }

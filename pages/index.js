@@ -67,7 +67,7 @@ const Home = () => {
                             id={'email'}
                             type={'email'}
                             value={email}
-                            ariaLabel={'email'}
+                            aria-label={'email'}
                             placeholder={'Enter recipient email address'}
                             onChange={handleEmailChange}
                             style={styles.formElement}
@@ -77,7 +77,7 @@ const Home = () => {
                             id={'message'}
                             type={'text'}
                             value={message}
-                            ariaLabel={'message'}
+                            aria-label={'message'}
                             placeholder={'Enter secret message'}
                             onChange={handleMessageChange}
                             style={styles.formElement}
