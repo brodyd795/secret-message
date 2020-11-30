@@ -50,7 +50,6 @@ const Header = () => {
             <AnimatePresence>
                 {isOpen &&
                     <motion.div
-                        key="modal"
                         initial={{
                             opacity: 0,
                             x: -200
@@ -62,6 +61,10 @@ const Header = () => {
                         exit={{
                             opacity: 0,
                             x: -200
+                        }}
+                        transition={{
+                            type: 'spring',
+                            mass: 0.5
                         }}
                     >
                         <div
