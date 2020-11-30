@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/index.css';
 
+import '../styles/index.css';
 import {theme} from '../tailwind.config';
 
 export default ({Component, pageProps}) =>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
+import {motion, AnimatePresence} from 'framer-motion';
 
 import {theme} from '../tailwind.config';
 
@@ -17,7 +18,7 @@ const Header = () => {
 
     return (
         <header
-            className={'h-screen md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between'}
+            className={'md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between'}
         >
             <div
                 className={'w-full md:w-auto flex justify-between items-center p-2'}
@@ -46,18 +47,38 @@ const Header = () => {
                     </svg>
                 </button>
             </div>
-            <div
-                className={`trans flex flex-grow ${isOpen ? 'w-full' : 'w-0'} z-10 left-0 overflow-x-hidden md:hidden`}
-            >
-                <div
-                    className={'w-full flex flex-col items-center justify-center'}
-                    style={{backgroundImage: `url(${require('../public/background.svg')})`}}
-                >
-                    <A href={'/send'}>{'Send message'}</A>
-                    <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
-                    <A href={'#'}>{'About'}</A>
-                </div>
-            </div>
+            <AnimatePresence>
+                {isOpen &&
+                    <motion.div
+                        key="modal"
+                        initial={{
+                            opacity: 0,
+                            x: -200
+                        }}
+                        animate={{
+                            opacity: 1,
+                            x: 0
+                        }}
+                        exit={{
+                            opacity: 0,
+                            x: -200
+                        }}
+                    >
+                        <div
+                            className={`h-screen flex flex-grow z-10 left-0 overflow-x-hidden md:hidden`}
+                        >
+                            <div
+                                className={'w-full flex flex-col items-center justify-center'}
+                                style={{backgroundImage: `url(${require('../public/background.svg')})`}}
+                            >
+                                <A href={'/send'}>{'Send message'}</A>
+                                <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
+                                <A href={'#'}>{'About'}</A>
+                            </div>
+                        </div>
+                    </motion.div>
+                }
+            </AnimatePresence>
             <div
                 className={'hidden md:block'}
             >
