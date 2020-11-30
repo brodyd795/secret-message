@@ -53,7 +53,7 @@ const Header = () => {
                     className={'w-full flex flex-col items-center justify-center'}
                     style={{backgroundImage: `url(${require('../public/background.svg')})`}}
                 >
-                    <A href={'#'}>{'Send message'}</A>
+                    <A href={'/send'}>{'Send message'}</A>
                     <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
                     <A href={'#'}>{'About'}</A>
                 </div>
@@ -61,7 +61,7 @@ const Header = () => {
             <div
                 className={'hidden md:block'}
             >
-                <A href={'#'}>{'Send message'}</A>
+                <A href={'/send'}>{'Send message'}</A>
                 <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
                 <A href={'#'}>{'About'}</A>
             </div>
