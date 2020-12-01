@@ -24,7 +24,9 @@ const Header = () => {
                 className={'w-full md:w-auto flex justify-between items-center p-2'}
                 style={{backgroundImage: `url(${require('../public/background.svg')})`}}
             >
-                <span>HOME</span>
+                <Link href={'/'}>
+                    <a>{'HOME'}</a>
+                </Link>
                 <button
                     type={'button'}
                     onClick={() => setIsOpen(!isOpen)}

@@ -1,135 +1,29 @@
-import React, {useState} from 'react';
-import fetch from 'isomorphic-unfetch';
+import React from 'react';
+import Link from 'next/link';
 
 import Page from '../components/page';
-import Footer from '../components/footer';
 import Header from '../components/header';
 
-const styles = {
-    wrapper: {
-        flex: 1
-    }
-    /*
-     * formElement: {
-     *     display: 'block'
-     * }
-     */
-};
-
-const Home = () => {
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
-    const [successMessage, setSuccessMessage] = useState('');
-    const [isSelfDestructChecked, setIsSelfDestructChecked] = useState(true);
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handleMessageChange = (e) => {
-        setMessage(e.target.value);
-    };
-
-    const handleSave = async (e) => {
-        e.preventDefault();
-
-        const result = await fetch('/api/controllers', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                message,
-                isSelfDestructChecked
-            })
-        });
-
-        const json = await result.json();
-
-        if (result.status === 200) {
-            setSuccessMessage('Success!');
-        } else {
-            setSuccessMessage('FAIL');
-        }
-    };
-
-    return (
-        <Page title={'Message'}>
-            <Header />
-            <div style={styles.wrapper}>
-                <div>
-                    <p>{successMessage}</p>
-                </div>
-                <form>
-                    <div className={'flex flex-col justify-center'}>
-                        <input
-                            id={'email'}
-                            type={'email'}
-                            value={email}
-                            aria-label={'email'}
-                            placeholder={'Enter recipient email address'}
-                            onChange={handleEmailChange}
-                            style={styles.formElement}
-                            className={'mx-4 my-2 p-1 rounded'}
-                        />
-                        <textarea
-                            id={'message'}
-                            type={'text'}
-                            value={message}
-                            aria-label={'message'}
-                            placeholder={'Enter secret message'}
-                            onChange={handleMessageChange}
-                            style={styles.formElement}
-                            className={'mx-4 my-2 p-1 rounded'}
-                        />
-                      
-                        {/* <div className="flex items-center justify-center w-full mb-24">
-                            <label
-                                htmlFor="shouldSelfDestruct"
-                                className="flex items-center cursor-pointer"
-                            >
-                                <div className="relative">
-                                    <span>15min</span>
-                                    <input
-                                        id="shouldSelfDestruct"
-                                        type="checkbox"
-                                        className="hidden"
-                                        checked={isSelfDestructChecked}
-                                        onChange={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
-                                    />
-                                    <div
-                                        className="w-10 h-4 bg-gray-400 rounded-full shadow-inner"
-                                    />
-                                    <div
-                                        className="absolute w-6 h-6 bg-white rounded-full shadow inset-y-0 left-0"
-                                        style={{
-                                            top: '-.25rem',
-                                            left: '-.25rem',
-                                            transition: 'all 0.3s ease-in-out',
-                                            transform: isSelfDestructChecked ? 'translateX(100%)' : null,
-                                            backgroundColor: isSelfDestructChecked ? '#48bb78' : null
-                                        }}
-                                    />
-                                    <span>Never</span>
-                                    <div>
-                                        <span>Self destruct</span>
-                                    </div>
-                                </div>
-                            </label>
-                        </div> */}
-                        <button
-                            type={'submit'}
-                            onClick={handleSave}
-                        >
-                            {'Save'}
-                        </button>
-                    </div>
-                </form>
-            </div>
-            <Footer />
-        </Page>
-    );
-};
+const Home = () =>
+    <Page title={'Home | Secret Message'}>
+        <Header />
+        <div className={'flex flex-1 md:flex-none justify-center flex-col ml-4 sm:ml-16 md:items-center md:justify-end md:ml-0 md:mt-32'} style={{height: '30vh'}}>
+            <span className={'text-4xl'}>Send a secret message.</span>
+            <span className={'text-2xl mt-5 ml-3'}>Fully secure.</span>
+            <span className={'text-2xl ml-3'}>Dead simple.</span>
+        </div>
+        <div className={'p-3 w-full flex justify-center'}>
+            <Link href="/send">
+                <button
+                    type={'button'}
+                    className={'w-full border h-16 mb-12 rounded md:w-auto md:mt-10 md:px-8 table-cell align-middle'}
+                >
+                    <a>
+                        {'Send message'}
+                    </a>
+                </button>
+            </Link>
+        </div>
+    </Page>;
 
 export default Home;
