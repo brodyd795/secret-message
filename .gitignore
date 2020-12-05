@@ -18,3 +18,7 @@
 
 # secrets
 .env
+
+# PWA auto-gen
+/public/sw*
+/public/workbox*
