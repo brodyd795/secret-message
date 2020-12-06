@@ -16,67 +16,69 @@ const Send = () => {
         <Page title={'Send | Secret Message'}>
             <Header />
             <div className={'text-red-500  h-screen flex flex-col justify-center items-center'}>
-                <AnimateSharedLayout>
-                    <AnimatePresence exitBeforeEnter>
-                        <motion.div
-                            key={step}
-                            initial="hidden"
-                            animate="visible"
-                            exit="exiting"
-                            layout
-                            variants={{
-                                hidden: {
-                                    scale: 0.8,
-                                    opacity: 0.1,
-                                    x: -100
-                                },
-                                visible: {
-                                    scale: 1,
-                                    opacity: 1,
-                                    transition: {
-                                        when: 'beforeChildren',
-                                        staggerChildren: 0.2
+                <div className={'relative'}>
+                    <AnimateSharedLayout>
+                        <AnimatePresence exitBeforeEnter>
+                            <motion.div
+                                key={step}
+                                initial="hidden"
+                                animate="visible"
+                                exit="exiting"
+                                layout
+                                variants={{
+                                    hidden: {
+                                        scale: 0.8,
+                                        opacity: 0.1,
+                                        x: -100
                                     },
-                                    x: 0
-                                },
-                                exiting: {
-                                    scale: 0.8,
-                                    opacity: 0.1,
-                                    x: 100
-                                }
-                            }}
-                        >
-                            <EmailForm
-                                email={email}
-                                setEmail={setEmail}
-                                step={step}
-                                setStep={setStep}
-                                setErrorMessage={setErrorMessage}
-                            />
-                            <MessageForm
-                                message={message}
-                                setErrorMessage={setErrorMessage}
-                                setMessage={setMessage}
-                                step={step}
-                                setStep={setStep}
-                            />
-                            <ConfirmForm
-                                isSelfDestructChecked={isSelfDestructChecked}
-                                setIsSelfDestructChecked={setIsSelfDestructChecked}
-                                step={step}
-                                setStep={setStep}
-                            />
-                            <Result
-                                email={email}
-                                message={message}
-                                isSelfDestructChecked={isSelfDestructChecked}
-                                step={step}
-                            />
-                        </motion.div>
-                    </AnimatePresence>
-                </AnimateSharedLayout>
-                <div>
-                    <p>{errorMessage}</p>
+                                    visible: {
+                                        scale: 1,
+                                        opacity: 1,
+                                        transition: {
+                                            when: 'beforeChildren',
+                                            staggerChildren: 0.2
+                                        },
+                                        x: 0
+                                    },
+                                    exiting: {
+                                        scale: 0.8,
+                                        opacity: 0.1,
+                                        x: 100
+                                    }
+                                }}
+                            >
+                                <EmailForm
+                                    email={email}
+                                    setEmail={setEmail}
+                                    step={step}
+                                    setStep={setStep}
+                                    setErrorMessage={setErrorMessage}
+                                />
+                                <MessageForm
+                                    message={message}
+                                    setErrorMessage={setErrorMessage}
+                                    setMessage={setMessage}
+                                    step={step}
+                                    setStep={setStep}
+                                />
+                                <ConfirmForm
+                                    isSelfDestructChecked={isSelfDestructChecked}
+                                    setIsSelfDestructChecked={setIsSelfDestructChecked}
+                                    step={step}
+                                    setStep={setStep}
+                                />
+                                <Result
+                                    email={email}
+                                    message={message}
+                                    isSelfDestructChecked={isSelfDestructChecked}
+                                    step={step}
+                                />
+                            </motion.div>
+                        </AnimatePresence>
+                    </AnimateSharedLayout>
+                    <div className={'absolute -bottom-20'}>
+                        <p>{errorMessage}</p>
+                    </div>
                 </div>
             </div>
         </Page>
