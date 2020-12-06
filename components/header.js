@@ -89,7 +89,7 @@ const Header = () => {
             >
                 <A href={'/send'}>{'Send message'}</A>
                 <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
-                <A href={'#'}>{'About'}</A>
+                <A href={'/about'}>{'About'}</A>
             </div>
         </header>
     );

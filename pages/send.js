@@ -10,6 +10,7 @@ const Send = () => {
     const [message, setMessage] = useState('');
     const [isSelfDestructChecked, setIsSelfDestructChecked] = useState(true);
     const [step, setStep] = useState(0);
+    const [errorMessage, setErrorMessage] = useState('');
 
     return (
         <Page title={'Send | Secret Message'}>
@@ -50,9 +51,11 @@ const Send = () => {
                                 setEmail={setEmail}
                                 step={step}
                                 setStep={setStep}
+                                setErrorMessage={setErrorMessage}
                             />
                             <MessageForm
                                 message={message}
+                                setErrorMessage={setErrorMessage}
                                 setMessage={setMessage}
                                 step={step}
                                 setStep={setStep}
@@ -72,6 +75,9 @@ const Send = () => {
                         </motion.div>
                     </AnimatePresence>
                 </AnimateSharedLayout>
+                <div>
+                    <p>{errorMessage}</p>
+                </div>
             </div>
         </Page>
     );
