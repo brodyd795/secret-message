@@ -3,6 +3,8 @@ import {motion, AnimatePresence, AnimateSharedLayout} from 'framer-motion';
 
 import {EmailForm, MessageForm, ConfirmForm, Result} from './form-steps';
 
+import FormSteps from '../enums/form-steps';
+
 const variants = {
     hidden: {
         scale: 0.8,
@@ -43,33 +45,37 @@ const Form = () => {
                         exit="exiting"
                         layout
                         variants={variants}
+                        className={'flex justify-center w-full'}
                     >
-                        <EmailForm
-                            email={email}
-                            setEmail={setEmail}
-                            step={step}
-                            setStep={setStep}
-                            setErrorMessage={setErrorMessage}
-                        />
-                        <MessageForm
-                            message={message}
-                            setErrorMessage={setErrorMessage}
-                            setMessage={setMessage}
-                            step={step}
-                            setStep={setStep}
-                        />
-                        <ConfirmForm
-                            isSelfDestructChecked={isSelfDestructChecked}
-                            setIsSelfDestructChecked={setIsSelfDestructChecked}
-                            step={step}
-                            setStep={setStep}
-                        />
-                        <Result
-                            email={email}
-                            message={message}
-                            isSelfDestructChecked={isSelfDestructChecked}
-                            step={step}
-                        />
+                        {step === FormSteps.EMAIL &&
+                            <EmailForm
+                                email={email}
+                                setEmail={setEmail}
+                                step={step}
+                                setStep={setStep}
+                                setErrorMessage={setErrorMessage}
+                            />}
+                        {step === FormSteps.MESSAGE &&
+                            <MessageForm
+                                message={message}
+                                setErrorMessage={setErrorMessage}
+                                setMessage={setMessage}
+                                step={step}
+                                setStep={setStep}
+                            />}
+                        {step === FormSteps.CONFIRM &&
+                            <ConfirmForm
+                                isSelfDestructChecked={isSelfDestructChecked}
+                                setIsSelfDestructChecked={setIsSelfDestructChecked}
+                                step={step}
+                                setStep={setStep}
+                            />}
+                        {step === FormSteps.RESULT &&
+                            <Result
+                                email={email}
+                                message={message}
+                                isSelfDestructChecked={isSelfDestructChecked}
+                            />}
                     </motion.div>
                 </AnimatePresence>
             </AnimateSharedLayout>

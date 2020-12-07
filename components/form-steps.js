@@ -1,5 +1,6 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
+import {theme} from '../tailwind.config';
 import FormSteps from '../enums/form-steps';
 
 const ButtonContainer = ({children}) =>
@@ -62,40 +63,39 @@ export const EmailForm = ({email, setEmail, step, setStep, setErrorMessage}) => 
 
     return (
         <>
-            {step === FormSteps.EMAIL &&
-                <form>
-                    <label className={'block'}>{'Enter recipient email address'}</label>
-                    <input
-                        id={'email'}
-                        type={'text'}
-                        value={email}
-                        aria-label={'email'}
-                        placeholder={'me@example.com'}
-                        onChange={(e) => {
-                            setErrorMessage('');
-                            setEmail(e.target.value);
-                        }}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                                handleSubmit();
-                            }
-                        }}
-                        required
-                        className={'mx-4 my-2 p-1 rounded'}
-                        ref={textInput}
+            <form>
+                <label className={'block'}>{'Enter recipient email address'}</label>
+                <input
+                    id={'email'}
+                    type={'text'}
+                    value={email}
+                    aria-label={'email'}
+                    placeholder={'me@example.com'}
+                    onChange={(e) => {
+                        setErrorMessage('');
+                        setEmail(e.target.value);
+                    }}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleSubmit();
+                        }
+                    }}
+                    required
+                    className={'mx-4 my-2 p-1 rounded'}
+                    ref={textInput}
+                />
+                <ButtonContainer>
+                    <BackButton
+                        backText={''}
+                        setStep={setStep}
+                        step={step}
                     />
-                    <ButtonContainer>
-                        <BackButton
-                            backText={''}
-                            setStep={setStep}
-                            step={step}
-                        />
-                        <NextButton
-                            nextText={'Secret Message'}
-                            handleSubmit={handleSubmit}
-                        />
-                    </ButtonContainer>
-                </form>}
+                    <NextButton
+                        nextText={'Secret Message'}
+                        handleSubmit={handleSubmit}
+                    />
+                </ButtonContainer>
+            </form>
         </>
     );
 };
@@ -121,38 +121,37 @@ export const MessageForm = ({message, setMessage, step, setStep, setErrorMessage
 
     return (
         <>
-            {step === FormSteps.MESSAGE &&
-                <form>
-                    <label className={'block'}>{'Enter secret message'}</label>
-                    <textarea
-                        id={'message'}
-                        value={message}
-                        aria-label={'message'}
-                        placeholder={'Enter secret message'}
-                        onChange={(e) => {
-                            setErrorMessage('');
-                            setMessage(e.target.value);
-                        }}
-                        className={'mx-4 my-2 p-1 rounded'}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
-                                handleSubmit();
-                            }
-                        }}
-                        ref={textInput}
+            <form>
+                <label className={'block'}>{'Enter secret message'}</label>
+                <textarea
+                    id={'message'}
+                    value={message}
+                    aria-label={'message'}
+                    placeholder={'Enter secret message'}
+                    onChange={(e) => {
+                        setErrorMessage('');
+                        setMessage(e.target.value);
+                    }}
+                    className={'mx-4 my-2 p-1 rounded'}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            handleSubmit();
+                        }
+                    }}
+                    ref={textInput}
+                />
+                <ButtonContainer>
+                    <BackButton
+                        backText={'Email'}
+                        setStep={setStep}
+                        step={step}
                     />
-                    <ButtonContainer>
-                        <BackButton
-                            backText={'Email'}
-                            setStep={setStep}
-                            step={step}
-                        />
-                        <NextButton
-                            nextText={'Confirm'}
-                            handleSubmit={handleSubmit}
-                        />
-                    </ButtonContainer>
-                </form>}
+                    <NextButton
+                        nextText={'Confirm'}
+                        handleSubmit={handleSubmit}
+                    />
+                </ButtonContainer>
+            </form>
         </>
     );
 };
@@ -162,45 +161,104 @@ export const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, st
         setStep(step + 1);
     };
 
+    const myListener = (e) => {
+        if (e.key === 'Enter') {
+            handleSubmit();
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('keypress', myListener);
+
+        return () => {
+            window.removeEventListener('keypress', myListener);
+        };
+    }, []);
+
     return (
         <>
-            {step === FormSteps.CONFIRM &&
-                <form>
-                    <p>Are you sure?</p>
-                    <div onClick={() => setIsSelfDestructChecked(!isSelfDestructChecked)}>
-                        <input
-                            type="checkbox"
-                            checked={isSelfDestructChecked}
-                        />
-                        <label>Self-destruct after 15min</label>
-                    </div>
-                    <ButtonContainer>
-                        <BackButton
-                            backText={'Message'}
-                            setStep={setStep}
-                            step={step}
-                        />
-                        <NextButton
-                            nextText={'Send'}
-                            handleSubmit={handleSubmit}
-                        />
-                    </ButtonContainer>
-                </form>}
+            <form>
+                <p>Are you sure?</p>
+                <div>
+                    <input
+                        type={'checkbox'}
+                        checked={isSelfDestructChecked}
+                        onChange={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
+                        className={'mx-3'}
+                    />
+                    <label>{'Self-destruct after 15min'}</label>
+                </div>
+                <ButtonContainer>
+                    <BackButton
+                        backText={'Message'}
+                        setStep={setStep}
+                        step={step}
+                    />
+                    <NextButton
+                        nextText={'Send'}
+                        handleSubmit={handleSubmit}
+                    />
+                </ButtonContainer>
+            </form>
         </>
     );
 };
 
-export const Result = ({email, message, isSelfDestructChecked, step}) => {
-    const success = true;
+export const Result = ({email, message, isSelfDestructChecked}) => {
+    const [success, setSuccess] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch('/api/controllers', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                message,
+                isSelfDestructChecked
+            })
+        }).then((result) => {
+            setLoading(false);
+            setSuccess(result.status === 200);
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const pulse = {
+        animation: theme.extend.animation.pulseskeleton
+    };
+
+    if (loading) {
+        return (
+            <div className={'flex flex-col w-full'}>
+                <div
+                    className={'bg-gray-800 w-3/4 h-5 mb-3'}
+                    style={pulse}
+                />
+                <div
+                    className={'bg-gray-800 w-full h-5'}
+                    style={pulse}
+                />
+            </div>
+        );
+    }
 
     return (
         <>
-            {step === FormSteps.RESULT &&
-                <div>
-                    {success ?
-                        <p>{'Success!'}</p> :
-                        <p>{'Error!'}</p>}
-                </div>}
+            <div>
+                {success ?
+                    <>
+                        <h3>{'Success!'}</h3>
+                        <p>{`Remind ${email} to check their email for your message. ${isSelfDestructChecked && 'It will self-destruct in 15 minutes.'} `}</p>
+                    </>
+                    :
+                    <>
+                        <h3>{'Something unexpected happened...'}</h3>
+                        <p>{'Sorry, something went wrong. Please try sending your message again.'}</p>
+                    </>}
+            </div>
         </>
     );
 };
