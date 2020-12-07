@@ -17,7 +17,7 @@ const H3 = ({children}) => <h3 className={'text-gray-500'}>{children}</h3>;
 const P = ({children}) => <p className={'m-3'}>{children}</p>;
 
 const UI = () => (
-    <Page title={'UI'}>
+    <Page title={'About'}>
         <Header />
         <div style={styles.wrapper} className={'md:flex flex-1 items-center'}>
             <div className={'md:flex'}>

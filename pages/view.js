@@ -1,13 +1,22 @@
 import React from 'react';
 
+import Page from '../components/page';
+import Header from '../components/header';
+
 const View = ({message}) => {
+    const foo = 'foo';
 
     return (
-        <>
-            <p>Secret message:</p>
-            <p>{message}</p>
-        </>
-    )
+        <Page title={'Send | Secret Message'}>
+            <Header />
+            <div className={'text-red-500  h-screen flex flex-col justify-center items-center'}>
+                <div className={'relative flexf flex-col justify-center w-3/4 sm:w-1/2 md:w-2/5'}>
+                    <p>Secret message:</p>
+                    <p>{message}</p>
+                </div>
+            </div>
+        </Page>
+    );
 };
 
 View.getInitialProps = async (ctx) => {
