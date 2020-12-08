@@ -1,31 +1,9 @@
 import React, {useState} from 'react';
-import {motion, AnimatePresence, AnimateSharedLayout} from 'framer-motion';
 
+import {SendFormSteps} from '../enums/form-steps';
+
+import SlidingDiv from './sliding-div';
 import {EmailForm, MessageForm, ConfirmForm, Result} from './form-steps';
-
-import FormSteps from '../enums/form-steps';
-
-const variants = {
-    hidden: {
-        scale: 0.8,
-        opacity: 0.1,
-        x: -100
-    },
-    visible: {
-        scale: 1,
-        opacity: 1,
-        transition: {
-            when: 'beforeChildren',
-            staggerChildren: 0.2
-        },
-        x: 0
-    },
-    exiting: {
-        scale: 0.8,
-        opacity: 0.1,
-        x: 100
-    }
-};
 
 const Form = () => {
     const [email, setEmail] = useState('');
@@ -36,49 +14,37 @@ const Form = () => {
 
     return (
         <>
-            <AnimateSharedLayout>
-                <AnimatePresence exitBeforeEnter>
-                    <motion.div
-                        key={step}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exiting"
-                        layout
-                        variants={variants}
-                        className={'flex justify-center w-full'}
-                    >
-                        {step === FormSteps.EMAIL &&
-                            <EmailForm
-                                email={email}
-                                setEmail={setEmail}
-                                step={step}
-                                setStep={setStep}
-                                setErrorMessage={setErrorMessage}
-                            />}
-                        {step === FormSteps.MESSAGE &&
-                            <MessageForm
-                                message={message}
-                                setErrorMessage={setErrorMessage}
-                                setMessage={setMessage}
-                                step={step}
-                                setStep={setStep}
-                            />}
-                        {step === FormSteps.CONFIRM &&
-                            <ConfirmForm
-                                isSelfDestructChecked={isSelfDestructChecked}
-                                setIsSelfDestructChecked={setIsSelfDestructChecked}
-                                step={step}
-                                setStep={setStep}
-                            />}
-                        {step === FormSteps.RESULT &&
-                            <Result
-                                email={email}
-                                message={message}
-                                isSelfDestructChecked={isSelfDestructChecked}
-                            />}
-                    </motion.div>
-                </AnimatePresence>
-            </AnimateSharedLayout>
+            <SlidingDiv motionKey={step}>
+                {step === SendFormSteps.EMAIL &&
+                    <EmailForm
+                        email={email}
+                        setEmail={setEmail}
+                        step={step}
+                        setStep={setStep}
+                        setErrorMessage={setErrorMessage}
+                    />}
+                {step === SendFormSteps.MESSAGE &&
+                    <MessageForm
+                        message={message}
+                        setErrorMessage={setErrorMessage}
+                        setMessage={setMessage}
+                        step={step}
+                        setStep={setStep}
+                    />}
+                {step === SendFormSteps.CONFIRM &&
+                    <ConfirmForm
+                        isSelfDestructChecked={isSelfDestructChecked}
+                        setIsSelfDestructChecked={setIsSelfDestructChecked}
+                        step={step}
+                        setStep={setStep}
+                    />}
+                {step === SendFormSteps.RESULT &&
+                    <Result
+                        email={email}
+                        message={message}
+                        isSelfDestructChecked={isSelfDestructChecked}
+                    />}
+            </SlidingDiv>
             <div className={'absolute -bottom-20'}>
                 <p>{errorMessage}</p>
             </div>
@@ -87,25 +53,3 @@ const Form = () => {
 };
 
 export default Form;
-
-// WIP framer motion component
-/*
- * <AnimatePresence initial={false}>
- *                     <motion.div
- *                         key={page}
- *                         custom={direction}
- *                         variants={variants}
- *                         initial="enter"
- *                         animate="center"
- *                         exit="exit"
- *                         transition={{
- *                             x: {type: 'spring', stiffness: 300, damping: 200},
- *                             opacity: {duration: 0.2}
- *                         }}
- *                     >
- *                         {page === 0 ? <p>Zero</p> : <p>Not Zero</p>}
- *                     </motion.div>
- *                 </AnimatePresence>
- *
- */
-

@@ -1,0 +1,4 @@
+export const ErrorMessages = {
+    SELF_DESTRUCTED: 'SELF_DESTRUCTED',
+    ALREADY_VIEWED: 'ALREADY_VIEWED'
+};

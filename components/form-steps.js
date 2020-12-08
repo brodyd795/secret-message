@@ -1,19 +1,19 @@
 import React, {useState, useRef, useEffect} from 'react';
 
 import {theme} from '../tailwind.config';
-import FormSteps from '../enums/form-steps';
+import {SendFormSteps} from '../enums/form-steps';
 
-const ButtonContainer = ({children}) =>
+export const ButtonContainer = ({children}) =>
     <div className={'flex justify-between'}>{children}</div>;
 
-export const BackButton = ({backText, step, setStep}) => (
+export const BackButton = ({backText, handleBack}) => (
     <>
         <div className={'flex h-24 w-24'}>
             {backText &&
                 <button
                     type={'button'}
                     className={'m-2 p-2 rounded border w-full'}
-                    onClick={() => setStep(step - 1)}
+                    onClick={handleBack}
                 >
                     {backText}
                 </button>}
@@ -56,7 +56,7 @@ export const EmailForm = ({email, setEmail, step, setStep, setErrorMessage}) => 
     const textInput = useRef(null);
 
     useEffect(() => {
-        if (step === FormSteps.EMAIL) {
+        if (step === SendFormSteps.EMAIL) {
             textInput.current.focus();
         }
     }, [step]);
@@ -87,8 +87,7 @@ export const EmailForm = ({email, setEmail, step, setStep, setErrorMessage}) => 
                 <ButtonContainer>
                     <BackButton
                         backText={''}
-                        setStep={setStep}
-                        step={step}
+                        handleBack={() => setStep(step - 1)}
                     />
                     <NextButton
                         nextText={'Secret Message'}
@@ -114,7 +113,7 @@ export const MessageForm = ({message, setMessage, step, setStep, setErrorMessage
     const textInput = useRef(null);
 
     useEffect(() => {
-        if (step === FormSteps.MESSAGE) {
+        if (step === SendFormSteps.MESSAGE) {
             textInput.current.focus();
         }
     }, [step]);
@@ -143,8 +142,7 @@ export const MessageForm = ({message, setMessage, step, setStep, setErrorMessage
                 <ButtonContainer>
                     <BackButton
                         backText={'Email'}
-                        setStep={setStep}
-                        step={step}
+                        handleBack={() => setStep(step - 1)}
                     />
                     <NextButton
                         nextText={'Confirm'}
@@ -191,8 +189,7 @@ export const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, st
                 <ButtonContainer>
                     <BackButton
                         backText={'Message'}
-                        setStep={setStep}
-                        step={step}
+                        handleBack={() => setStep(step - 1)}
                     />
                     <NextButton
                         nextText={'Send'}
