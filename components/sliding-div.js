@@ -3,21 +3,19 @@ import {motion, AnimatePresence, AnimateSharedLayout} from 'framer-motion';
 
 const variants = {
     hidden: {
-        scale: 0.8,
         opacity: 0.1,
         x: -100
     },
     visible: {
-        scale: 1,
         opacity: 1,
         transition: {
-            when: 'beforeChildren',
-            staggerChildren: 0.2
+            type: 'spring',
+            bounce: 0,
+            duration: 0.5
         },
         x: 0
     },
     exiting: {
-        scale: 0.8,
         opacity: 0.1,
         x: 100
     }
