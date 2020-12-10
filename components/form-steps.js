@@ -7,20 +7,24 @@ import RightArrowIcon from '../public/right-arrow.svg';
 
 import SlidingDiv from './sliding-div';
 
+const Label = ({children}) => (
+    <label className={'block text-center text-xl'}>{children}</label>
+);
+
 export const ButtonContainer = ({children}) =>
     <div className={'w-screen flex justify-between fixed bottom-0 left-0'}>{children}</div>;
 
 export const BackButton = ({backText, handleBack}) => (
     <>
-        <div className={'flex h-24 w-1/2 sm:w-2/5'}>
+        <div className={'flex h-20 w-1/2 sm:w-2/5'}>
             {backText &&
                 <button
                     type={'button'}
                     className={'flex flex-col justify-center items-center m-2 p-2 rounded border w-full'}
                     onClick={handleBack}
                 >
-                    <LeftArrowIcon className={''} />
-                    <span>{backText}</span>
+                    <LeftArrowIcon className={'h-6'} />
+                    <span className={'text-lg'}>{backText}</span>
                 </button>}
         </div>
     </>
@@ -28,7 +32,7 @@ export const BackButton = ({backText, handleBack}) => (
 
 export const NextButton = ({nextText, handleSubmit}) => (
     <>
-        <div className={'flex h-24 w-1/2 sm:w-2/5'}>
+        <div className={'flex h-20 w-1/2 sm:w-2/5'}>
             {nextText &&
                 <button
                     type={'submit'}
@@ -39,8 +43,8 @@ export const NextButton = ({nextText, handleSubmit}) => (
                         handleSubmit();
                     }}
                 >
-                    <RightArrowIcon />
-                    <span>{nextText}</span>
+                    <RightArrowIcon className={'h-6'} />
+                    <span className={'text-lg'}>{nextText}</span>
                 </button>}
         </div>
     </>
@@ -69,9 +73,9 @@ export const EmailForm = ({email, setEmail, step, setStep, setErrorMessage}) => 
 
     return (
         <>
-            <form>
+            <form className={'w-full'}>
                 <SlidingDiv motionKey={step}>
-                    <label className={'block'}>{'Enter recipient email address'}</label>
+                    <Label>{'Enter recipient email address'}</Label>
                     <input
                         id={'email'}
                         type={'text'}
@@ -83,7 +87,7 @@ export const EmailForm = ({email, setEmail, step, setStep, setErrorMessage}) => 
                             setEmail(e.target.value);
                         }}
                         required
-                        className={'mx-4 my-2 p-1 rounded'}
+                        className={'my-4 p-1 rounded'}
                         ref={textInput}
                     />
                 </SlidingDiv>
@@ -123,19 +127,20 @@ export const MessageForm = ({message, setMessage, step, setStep, setErrorMessage
 
     return (
         <>
-            <form>
+            <form className={'w-full'}>
                 <SlidingDiv motionKey={step}>
-                    <label className={'block'}>{'Enter secret message'}</label>
+                    <Label>{'Enter secret message'}</Label>
                     <textarea
                         id={'message'}
                         value={message}
                         aria-label={'message'}
-                        placeholder={'Enter secret message'}
+                        placeholder={'e.g. My real name is Bruce Wayne'}
                         onChange={(e) => {
                             setErrorMessage('');
                             setMessage(e.target.value);
                         }}
-                        className={'mx-4 my-2 p-1 rounded'}
+                        cols={'10'}
+                        className={'my-4 p-1 rounded'}
                         ref={textInput}
                     />
                 </SlidingDiv>
@@ -177,13 +182,13 @@ export const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, st
         <>
             <form>
                 <SlidingDiv motionKey={step}>
-                    <p>Are you sure?</p>
+                    <p className={'text-center text-xl'}>Are you sure?</p>
                     <label>
                         <input
                             onClick={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
                             type={'checkbox'}
                             checked={isSelfDestructChecked}
-                            className={'mx-3'}
+                            className={'mx-3 my-3'}
                         />
                         {'Self-destruct after 15min'}
                     </label>
@@ -249,13 +254,13 @@ export const Result = ({email, message, isSelfDestructChecked}) => {
             <div>
                 {success ?
                     <>
-                        <h3>{'Success!'}</h3>
-                        <p>{`Remind ${email} to check their email for your message. ${isSelfDestructChecked && 'It will self-destruct in 15 minutes.'} `}</p>
+                        <h3 className={'text-center text-xl'}>{'Success!'}</h3>
+                        <p className={'mt-4'}>{`Remind ${email} to check their email for your message. ${isSelfDestructChecked && 'It will self-destruct in 15 minutes.'} `}</p>
                     </>
                     :
                     <>
-                        <h3>{'Something unexpected happened...'}</h3>
-                        <p>{'Sorry, something went wrong. Please try sending your message again.'}</p>
+                        <h3 className={'text-center text-xl'}>{'Something unexpected happened...'}</h3>
+                        <p className={'mt-4'}>{'Sorry, something went wrong. Please try sending your message again.'}</p>
                     </>}
             </div>
         </>

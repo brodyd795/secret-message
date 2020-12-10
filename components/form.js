@@ -42,7 +42,7 @@ const Form = () => {
                     message={message}
                     isSelfDestructChecked={isSelfDestructChecked}
                 />}
-            <div className={'absolute -bottom-20'}>
+            <div className={'absolute -bottom-10'}>
                 <p>{errorMessage}</p>
             </div>
         </>

@@ -20,10 +20,10 @@ const Header = () => {
 
     return (
         <header
-            className={'md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between z-10'}
+            className={'md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between z-10 bg-gray-800'}
         >
             <div
-                className={'w-full md:w-auto flex justify-between items-center p-2 bg-gray-800'}
+                className={'w-full md:w-auto flex justify-between items-center p-2'}
             >
                 <Link href={'/'}>
                     <a>{'HOME'}</a>
