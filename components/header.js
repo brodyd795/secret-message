@@ -3,6 +3,8 @@ import Link from 'next/link';
 import {motion, AnimatePresence} from 'framer-motion';
 
 import {theme} from '../tailwind.config';
+import BarsIcon from '../public/bars.svg';
+import TimesIcon from '../public/times.svg';
 
 const A = ({children, href}) =>
     <Link href={href}>
@@ -18,11 +20,10 @@ const Header = () => {
 
     return (
         <header
-            className={'md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between'}
+            className={'md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between z-10'}
         >
             <div
-                className={'w-full md:w-auto flex justify-between items-center p-2'}
-                style={{backgroundImage: `url(${require('../public/background.svg')})`}}
+                className={'w-full md:w-auto flex justify-between items-center p-2 bg-gray-800'}
             >
                 <Link href={'/'}>
                     <a>{'HOME'}</a>
@@ -33,20 +34,7 @@ const Header = () => {
                     className={'block hover:text-white focus:text-white focus:outline-none active:bg-transparent p-3 md:hidden'}
                     style={{color: theme.extend.colors.gold.DEFAULT}}
                 >
-                    <svg
-                        className="h-6 w-6 fill-current"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            fillRule="evenodd"
-                            d={
-                                isOpen ?
-                                    'M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z'
-                                    :
-                                    'M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z'
-                            }
-                        />
-                    </svg>
+                    {isOpen ? <TimesIcon className={'h-6'} /> : <BarsIcon className={'h-6'} />}
                 </button>
             </div>
             <AnimatePresence>
@@ -73,8 +61,7 @@ const Header = () => {
                             className={`h-screen flex flex-grow z-10 left-0 overflow-x-hidden md:hidden`}
                         >
                             <div
-                                className={'w-full flex flex-col items-center justify-center'}
-                                style={{backgroundImage: `url(${require('../public/background.svg')})`}}
+                                className={'w-full flex flex-col items-center justify-center bg-gray-800'}
                             >
                                 <A href={'/send'}>{'Send message'}</A>
                                 <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>

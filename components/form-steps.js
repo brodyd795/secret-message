@@ -2,6 +2,8 @@ import React, {useState, useRef, useEffect} from 'react';
 
 import {theme} from '../tailwind.config';
 import {SendFormSteps} from '../enums/form-steps';
+import LeftArrowIcon from '../public/left-arrow.svg';
+import RightArrowIcon from '../public/right-arrow.svg';
 
 import SlidingDiv from './sliding-div';
 
@@ -10,14 +12,15 @@ export const ButtonContainer = ({children}) =>
 
 export const BackButton = ({backText, handleBack}) => (
     <>
-        <div className={'flex h-24 w-24'}>
+        <div className={'flex h-24 w-1/2 sm:w-2/5'}>
             {backText &&
                 <button
                     type={'button'}
-                    className={'m-2 p-2 rounded border w-full'}
+                    className={'flex flex-col justify-center items-center m-2 p-2 rounded border w-full'}
                     onClick={handleBack}
                 >
-                    {backText}
+                    <LeftArrowIcon className={''} />
+                    <span>{backText}</span>
                 </button>}
         </div>
     </>
@@ -25,18 +28,19 @@ export const BackButton = ({backText, handleBack}) => (
 
 export const NextButton = ({nextText, handleSubmit}) => (
     <>
-        <div className={'flex h-24 w-24'}>
+        <div className={'flex h-24 w-1/2 sm:w-2/5'}>
             {nextText &&
                 <button
                     type={'submit'}
-                    className={'m-2 p-2 rounded border w-full'}
+                    className={'flex flex-col justify-center items-center m-2 p-2 rounded border w-full'}
                     onClick={(e) => {
                         e.preventDefault();
 
                         handleSubmit();
                     }}
                 >
-                    {nextText}
+                    <RightArrowIcon />
+                    <span>{nextText}</span>
                 </button>}
         </div>
     </>
