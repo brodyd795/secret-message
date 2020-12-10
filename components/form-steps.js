@@ -174,15 +174,15 @@ export const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, st
             <form>
                 <SlidingDiv motionKey={step}>
                     <p>Are you sure?</p>
-                    <div>
+                    <label>
                         <input
+                            onClick={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
                             type={'checkbox'}
                             checked={isSelfDestructChecked}
-                            onChange={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
                             className={'mx-3'}
                         />
-                        <label>{'Self-destruct after 15min'}</label>
-                    </div>
+                        {'Self-destruct after 15min'}
+                    </label>
                 </SlidingDiv>
                 <ButtonContainer>
                     <BackButton
