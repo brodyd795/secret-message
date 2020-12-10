@@ -3,8 +3,10 @@ import React, {useState, useRef, useEffect} from 'react';
 import {theme} from '../tailwind.config';
 import {SendFormSteps} from '../enums/form-steps';
 
+import SlidingDiv from './sliding-div';
+
 export const ButtonContainer = ({children}) =>
-    <div className={'flex justify-between'}>{children}</div>;
+    <div className={'w-screen flex justify-between fixed bottom-0 left-0'}>{children}</div>;
 
 export const BackButton = ({backText, handleBack}) => (
     <>
@@ -64,26 +66,23 @@ export const EmailForm = ({email, setEmail, step, setStep, setErrorMessage}) => 
     return (
         <>
             <form>
-                <label className={'block'}>{'Enter recipient email address'}</label>
-                <input
-                    id={'email'}
-                    type={'text'}
-                    value={email}
-                    aria-label={'email'}
-                    placeholder={'me@example.com'}
-                    onChange={(e) => {
-                        setErrorMessage('');
-                        setEmail(e.target.value);
-                    }}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleSubmit();
-                        }
-                    }}
-                    required
-                    className={'mx-4 my-2 p-1 rounded'}
-                    ref={textInput}
-                />
+                <SlidingDiv motionKey={step}>
+                    <label className={'block'}>{'Enter recipient email address'}</label>
+                    <input
+                        id={'email'}
+                        type={'text'}
+                        value={email}
+                        aria-label={'email'}
+                        placeholder={'me@example.com'}
+                        onChange={(e) => {
+                            setErrorMessage('');
+                            setEmail(e.target.value);
+                        }}
+                        required
+                        className={'mx-4 my-2 p-1 rounded'}
+                        ref={textInput}
+                    />
+                </SlidingDiv>
                 <ButtonContainer>
                     <BackButton
                         backText={''}
@@ -121,24 +120,21 @@ export const MessageForm = ({message, setMessage, step, setStep, setErrorMessage
     return (
         <>
             <form>
-                <label className={'block'}>{'Enter secret message'}</label>
-                <textarea
-                    id={'message'}
-                    value={message}
-                    aria-label={'message'}
-                    placeholder={'Enter secret message'}
-                    onChange={(e) => {
-                        setErrorMessage('');
-                        setMessage(e.target.value);
-                    }}
-                    className={'mx-4 my-2 p-1 rounded'}
-                    onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                            handleSubmit();
-                        }
-                    }}
-                    ref={textInput}
-                />
+                <SlidingDiv motionKey={step}>
+                    <label className={'block'}>{'Enter secret message'}</label>
+                    <textarea
+                        id={'message'}
+                        value={message}
+                        aria-label={'message'}
+                        placeholder={'Enter secret message'}
+                        onChange={(e) => {
+                            setErrorMessage('');
+                            setMessage(e.target.value);
+                        }}
+                        className={'mx-4 my-2 p-1 rounded'}
+                        ref={textInput}
+                    />
+                </SlidingDiv>
                 <ButtonContainer>
                     <BackButton
                         backText={'Email'}
@@ -176,16 +172,18 @@ export const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, st
     return (
         <>
             <form>
-                <p>Are you sure?</p>
-                <div>
-                    <input
-                        type={'checkbox'}
-                        checked={isSelfDestructChecked}
-                        onChange={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
-                        className={'mx-3'}
-                    />
-                    <label>{'Self-destruct after 15min'}</label>
-                </div>
+                <SlidingDiv motionKey={step}>
+                    <p>Are you sure?</p>
+                    <div>
+                        <input
+                            type={'checkbox'}
+                            checked={isSelfDestructChecked}
+                            onChange={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
+                            className={'mx-3'}
+                        />
+                        <label>{'Self-destruct after 15min'}</label>
+                    </div>
+                </SlidingDiv>
                 <ButtonContainer>
                     <BackButton
                         backText={'Message'}
