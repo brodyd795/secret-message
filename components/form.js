@@ -41,6 +41,8 @@ const Form = () => {
                     email={email}
                     message={message}
                     isSelfDestructChecked={isSelfDestructChecked}
+                    step={step}
+                    setStep={setStep}
                 />}
             <div className={'absolute -bottom-10'}>
                 <p>{errorMessage}</p>

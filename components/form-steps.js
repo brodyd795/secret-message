@@ -7,7 +7,7 @@ import RightArrowIcon from '../public/right-arrow.svg';
 
 import SlidingDiv from './sliding-div';
 
-const Label = ({children}) => (
+export const Label = ({children}) => (
     <label className={'block text-center text-xl'}>{children}</label>
 );
 
@@ -180,18 +180,15 @@ export const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, st
 
     return (
         <>
-            <form>
+            <form className={'w-full'}>
                 <SlidingDiv motionKey={step}>
-                    <p className={'text-center text-xl'}>Are you sure?</p>
-                    <label>
-                        <input
-                            onClick={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
-                            type={'checkbox'}
-                            checked={isSelfDestructChecked}
-                            className={'mx-3 my-3'}
-                        />
-                        {'Self-destruct after 15min'}
-                    </label>
+                    <p className={'text-center text-xl'}>{'Are you sure?'}</p>
+                    <div className={''}>
+                        <label className="flex cursor-pointer items-center">
+                            <input className="checkbox cursor-pointer relative w-10 h-5 transition-all duration-200 ease-in-out bg-gray-400 rounded-full shadow-inner outline-none appearance-none" type={'checkbox'} checked={isSelfDestructChecked} onClick={() => setIsSelfDestructChecked(!isSelfDestructChecked)} />
+                            <span className="ml-2">{`Self-destruct ${isSelfDestructChecked ? 'after 15min' : 'never'}`}</span>
+                        </label>
+                    </div>
                 </SlidingDiv>
                 <ButtonContainer>
                     <BackButton
@@ -208,7 +205,7 @@ export const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, st
     );
 };
 
-export const Result = ({email, message, isSelfDestructChecked}) => {
+export const Result = ({email, message, isSelfDestructChecked, setStep, step}) => {
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -262,6 +259,12 @@ export const Result = ({email, message, isSelfDestructChecked}) => {
                         <h3 className={'text-center text-xl'}>{'Something unexpected happened...'}</h3>
                         <p className={'mt-4'}>{'Sorry, something went wrong. Please try sending your message again.'}</p>
                     </>}
+                    <ButtonContainer>
+                    <BackButton
+                        backText={'Message'}
+                        handleBack={() => setStep(step - 1)}
+                    />
+                </ButtonContainer>
             </div>
         </>
     );

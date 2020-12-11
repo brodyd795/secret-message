@@ -8,7 +8,7 @@ const Send = () => (
     <Page title={'Send | Secret Message'}>
         <Header />
         <div className={'text-red-500  h-screen flex flex-col justify-center items-center'}>
-            <div className={'relative flex justify-center w-3/4 sm:w-1/2 md:w-2/5'}>
+            <div className={'relative flex justify-center w-3/4 sm:w-2/5 md:w-1/3 lg:1/4'}>
                 <Form />
             </div>
         </div>

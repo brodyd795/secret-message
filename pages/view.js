@@ -7,7 +7,7 @@ import Header from '../components/header';
 import SlidingDiv from '../components/sliding-div';
 import {ViewFormSteps} from '../enums/form-steps';
 import {ErrorMessages} from '../enums/error-messages';
-import {BackButton, ButtonContainer, NextButton} from '../components/form-steps';
+import {BackButton, ButtonContainer, Label, NextButton} from '../components/form-steps';
 
 const BackToSafety = () => (
     <Link href={'/'}>
@@ -16,27 +16,24 @@ const BackToSafety = () => (
 );
 
 const SecretMessage = ({message}) => {
-    const [header, setHeader] = useState('');
-    const [body, setBody] = useState('');
-
     if (!message) {
         return (
             <div>
-                <h3>{'Something went wrong...'}</h3>
+                <Label>{'Something went wrong...'}</Label>
                 <p>{'Sorry, looks like something strange happened. If you know the sender, please contact them regarding your message.'}</p>
             </div>
         );
     } else if (message === ErrorMessages.ALREADY_VIEWED) {
         return (
             <div>
-                <h3>{'Something went wrong...'}</h3>
+                <Label>{'Something went wrong...'}</Label>
                 <p>{'Sorry, looks like this message has already been viewed. If you didn\'t view it, please contact the sender immediately.'}</p>
             </div>
         );
     } else if (message === ErrorMessages.SELF_DESTRUCTED) {
         return (
             <div>
-                <h3>{'Something went wrong...'}</h3>
+                <Label>{'Something went wrong...'}</Label>
                 <p>{'Sorry, looks like this message self-destructed 15 minutes after it was sent. Please contact the sender directly.'}</p>
             </div>
         );
@@ -44,7 +41,7 @@ const SecretMessage = ({message}) => {
 
     return (
         <div>
-            <h3>{'Message:'}</h3>
+            <Label>{'Message:'}</Label>
             <p>{message}</p>
         </div>
     );
@@ -73,43 +70,42 @@ const View = () => {
                     <SlidingDiv motionKey={step}>
                         {step === 0 &&
                             <div>
-                                <h3>{'Are you sure?'}</h3>
-                                <p>{'You can only view this message once. Once you view it, it will be permanently deleted from the server.'}</p>
-                                <ButtonContainer>
-                                    <BackButton
-                                        backText={'View later'}
-                                        handleBack={() => setStep(ViewFormSteps.BACK_TO_SAFETY)}
-                                    />
-                                    <NextButton
-                                        nextText={'Confirm'}
-                                        handleSubmit={handleConfirm}
-                                    />
-                                </ButtonContainer>
+                                <Label>{'Are you sure?'}</Label>
+                                <p className={'mt-3'}>{'You can only view this message once.'}</p>
+                                <p className={''}>{'Once you view it, it will be permanently deleted from the server.'}</p>
                             </div>}
                         {step === 1 &&
                             <SecretMessage message={message} />}
                         {step === 2 &&
                             <BackToSafety />}
                     </SlidingDiv>
+                    <ButtonContainer>
+                        {message ?
+                            <>
+                                <BackButton
+                                    backText={''}
+                                    handleBack={() => setStep(ViewFormSteps.BACK_TO_SAFETY)}
+                                />
+                                <NextButton
+                                    nextText={'Home'}
+                                    handleSubmit={() => setStep(ViewFormSteps.BACK_TO_SAFETY)}
+                                />
+                            </>
+                            : <>
+                                <BackButton
+                                    backText={'View later'}
+                                    handleBack={() => setStep(ViewFormSteps.BACK_TO_SAFETY)}
+                                />
+                                <NextButton
+                                    nextText={'Confirm'}
+                                    handleSubmit={handleConfirm}
+                                />
+                            </>}
+                    </ButtonContainer>
                 </div>
             </div>
         </Page>
     );
 };
-
-/*
- * View.getInitialProps = async (ctx) => {
- *     const {query} = ctx;
- *     const res = await fetch(`http://localhost:3000/api/controllers/view?id=${query.id}`);
- *     const json = await res.json();
- *     const message = json.message;
- */
-
-/*
- *     return {
- *         message
- *     };
- * };
- */
 
 export default View;
