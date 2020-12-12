@@ -18,7 +18,7 @@ export default ({Component, pageProps}) =>
                 body {
                     color: ${theme.extend.colors.gold.DEFAULT};
                     font-size: 16px;
-                    background-color: gray;
+                    background-color: #03060c;
                 }
                 
                 html,

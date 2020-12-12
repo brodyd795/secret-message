@@ -3,7 +3,7 @@ module.exports = {
         extend: {
             colors: {
                 gold: {
-                    DEFAULT: '#e5c204'
+                    DEFAULT: '#7b7b7b'
                 }
             },
             animation: {

@@ -31,7 +31,7 @@ const SlidingDiv = ({children, motionKey}) => (
                 exit="exiting"
                 layout
                 variants={variants}
-                className={'flex flex-col justify-center w-full'}
+                className={'flex flex-col items-center justify-center w-full'}
             >
                 {children}
             </motion.div>

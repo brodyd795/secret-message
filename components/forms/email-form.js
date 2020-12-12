@@ -27,24 +27,26 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage}) => {
 
     return (
         <>
-            <form className={'w-full'}>
+            <form className={'flex justify-center w-full'}>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Enter recipient email address'}</FormHeader>
-                    <input
-                        id={'email'}
-                        type={'text'}
-                        value={email}
-                        aria-label={'email'}
-                        placeholder={'me@example.com'}
-                        onChange={(e) => {
-                            setErrorMessage('');
-                            setEmail(e.target.value);
-                        }}
-                        required
-                        className={'my-4 p-1 rounded'}
-                        ref={textInput}
-                        autoComplete={'off'}
-                    />
+                    <div className={'flex justify-center w-3/4 sm:w-2/5 md:w-1/3 lg:1/4'}>
+                        <input
+                            id={'email'}
+                            type={'text'}
+                            value={email}
+                            aria-label={'email'}
+                            placeholder={'me@example.com'}
+                            onChange={(e) => {
+                                setErrorMessage('');
+                                setEmail(e.target.value);
+                            }}
+                            required
+                            className={'my-4 p-1 rounded w-full'}
+                            ref={textInput}
+                            autoComplete={'off'}
+                        />
+                    </div>
                 </SlidingDiv>
                 <FormButtonContainer
                     backText={''}
