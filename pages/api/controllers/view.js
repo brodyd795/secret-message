@@ -2,9 +2,14 @@ import viewService from '../services/view-service';
 
 export default async (req, res) => {
 	try {
-        const { id } = req.query;
+        const { id, key, iv, hmacKey } = req.query;
 
-        const results = await viewService({id});
+        const results = await viewService({
+			id,
+			key,
+			iv,
+			hmacKey
+		});
 
         res.status(200).json(results);
 	} catch (error) {

@@ -45,5 +45,5 @@ export const withTransactionWrapper = async (queries, args) => {
 		}
 	}
 
-	return queries(props);
+	return queries(args);
 };

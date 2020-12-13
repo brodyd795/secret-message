@@ -30,7 +30,7 @@ const Home = () => {
 	const handleSave = async (e) => {
 		e.preventDefault();
 
-		const result = await fetch(`/api/controllers`, {
+		const result = await fetch(`/api/controllers/send`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -43,7 +43,6 @@ const Home = () => {
 		});
 
 		const json = await result.json();
-		console.log('json', json)
 
 		if (result.status === 200) {
 			setSuccessMessage('Success!')

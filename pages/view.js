@@ -12,7 +12,9 @@ const View = ({message}) => {
 
 View.getInitialProps = async (ctx) => {
     const {query} = ctx;
-    const res = await fetch(`http://localhost:3000/api/controllers/view?id=${query.id}`);
+    const {id, key, iv, hmacKey} = query;
+
+    const res = await fetch(`http://localhost:3000/api/controllers/view?id=${id}&key=${key}&iv=${iv}&hmacKey=${hmacKey}`);
     const json = await res.json();
     const message = json.message;
 

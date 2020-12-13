@@ -24,9 +24,9 @@ export default async (recipientEmailAddress, link, isSelfDestructChecked) => {
     
 	transporter.sendMail(mailOptions, (error, info) => {
 		if (error) {
-            console.log('error', error)
             return error;
-        }
+		}
+
         return;
     });
 };
@@ -66,8 +66,6 @@ export default async (recipientEmailAddress, link, isSelfDestructChecked) => {
 //     };
 
 //     const data = await new AWS.SES({apiVersion: '2010-12-01'}).sendEmail(params).promise();
-
-//     console.log('data.MessageId', data.MessageId);
 
 //     return data;
 // };

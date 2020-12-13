@@ -7,14 +7,18 @@ export default async (req, res) => {
 	try {
 		const { email, message, isSelfDestructChecked } = req.body;
 
-		const guid = await postMessageService({
-			email,
+		const {
+			guid,
+			key,
+			iv,
+			hmacKey
+		} = await postMessageService({
 			message,
 			isSelfDestructChecked
 		});
 
 		if (uuidValidate(guid)) {
-			const link = `http://localhost:3000/view?id=${guid}`;
+			const link = `http://localhost:3000/view?id=${guid}&key=${key}&iv=${iv}&hmacKey=${hmacKey}`;
 
 			await sendEmailService(email, link, isSelfDestructChecked);
 
