@@ -1,86 +1,29 @@
-import React, { useState } from "react";
-import fetch from "isomorphic-unfetch";
+import React from 'react';
+import Link from 'next/link';
 
-const styles = {
-	wrapper: {
-		display: "flex",
-		flexDirection: "column",
-		width: "200px",
-	},
-	formElement: {
-		display: "block",
-	},
-};
+import Page from '../components/page';
+import Header from '../components/header';
 
-const Home = () => {
-	const [email, setEmail] = useState("");
-	const [message, setMessage] = useState("");
-	const [successMessage, setSuccessMessage] = useState("");
-	const [isSelfDestructChecked, setIsSelfDestructChecked] = useState(true);
-
-
-	const handleEmailChange = (e) => {
-		setEmail(e.target.value);
-	};
-
-	const handleMessageChange = (e) => {
-		setMessage(e.target.value);
-	};
-
-	const handleSave = async (e) => {
-		e.preventDefault();
-
-		const result = await fetch(`/api/controllers/send`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				email,
-				message,
-				isSelfDestructChecked
-			}),
-		});
-
-		const json = await result.json();
-
-		if (result.status === 200) {
-			setSuccessMessage('Success!')
-		} else {
-			setSuccessMessage('FAIL')
-		}
-	};
-
-	return (
-		<div style={styles.wrapper}>
-			<div>
-				<p>{successMessage}</p>
-			</div>
-			<form>
-				<label htmlFor={'email'}>email</label>
-				<input
-					id={'email'}
-					type={"email"}
-					value={email}
-					placeholder={"Enter recipient email address"}
-					onChange={handleEmailChange}
-					style={styles.formElement}
-				/>
-				<label htmlFor={'message'}>message</label>
-				<input
-					id={'message'}
-					type={"text"}
-					value={message}
-					placeholder={"Enter secret message"}
-					onChange={handleMessageChange}
-					style={styles.formElement}
-				/>
-				<label htmlFor={'self-destruct'}>Self destruct this message after 15 minutes?</label>
-				<input type={'checkbox'} name={'self-destruct'} checked={isSelfDestructChecked} onChange={() => setIsSelfDestructChecked(!isSelfDestructChecked)} />
-				<button type={"submit"} onClick={handleSave}>{'Save'}</button>
-			</form>
-		</div>
-	);
-};
+const Home = () =>
+    <Page title={'Home | Secret Message'}>
+        <Header />
+        <div className={'flex flex-1 md:flex-none justify-center flex-col ml-4 sm:ml-16 md:items-center md:justify-end md:ml-0 md:mt-32'} style={{height: '30vh'}}>
+            <span className={'text-4xl'}>Send a secret message.</span>
+            <span className={'text-2xl mt-5 ml-3'}>Fully secure.</span>
+            <span className={'text-2xl ml-3'}>Dead simple.</span>
+        </div>
+        <div className={'p-3 w-full flex justify-center'}>
+            <Link href="/send">
+                <button
+                    type={'button'}
+                    className={'w-full border h-16 mb-12 rounded md:w-auto md:mt-10 md:px-8 table-cell align-middle'}
+                >
+                    <a>
+                        {'Send message'}
+                    </a>
+                </button>
+            </Link>
+        </div>
+    </Page>;
 
 export default Home;

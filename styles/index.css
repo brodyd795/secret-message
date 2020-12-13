@@ -1,0 +1,16 @@
+/* purgecss start ignore */
+@import 'tailwindcss/base';
+/* purgecss end ignore */
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+@layer utilities {
+	.trans {
+		transition: 0.5s;
+	}
+	,
+	.vh-50 {
+		height: 50vh;
+	}
+}

@@ -2,16 +2,16 @@ import React from 'react';
 
 import Page from '../components/page';
 import Header from '../components/header';
-import ViewForm from '../components/forms/view-form';
+import SendForm from '../components/forms/send-form';
 
-const View = () =>
+const Send = () =>
     <Page title={'Send | Secret Message'}>
         <Header />
         <div className={'h-screen flex flex-col justify-center items-center'}>
-            <div className={'relative flex flex-col justify-center w-3/4 sm:w-1/2 md:w-2/5'}>
-                <ViewForm />
+            <div className={'relative flex justify-center w-full'}>
+                <SendForm />
             </div>
         </div>
     </Page>;
 
-export default View;
+export default Send;

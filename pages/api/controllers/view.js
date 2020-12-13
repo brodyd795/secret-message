@@ -1,18 +1,19 @@
 import viewService from '../services/view-service';
 
 export default async (req, res) => {
-	try {
-        const { id, key, iv, hmacKey } = req.query;
+    try {
+        const {id, key, iv, hmacKey} = req.query;
 
         const results = await viewService({
-			id,
-			key,
-			iv,
-			hmacKey
-		});
+            id,
+            key,
+            iv,
+            hmacKey
+        });
 
         res.status(200).json(results);
-	} catch (error) {
-		res.status(500).json({ error });
-	}
+    } catch (error) {
+        console.log('error', error);
+        res.status(500).json({error});
+    }
 };

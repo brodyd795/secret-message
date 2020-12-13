@@ -15,7 +15,12 @@ module.exports = {
 		'default-case': 0,
 		'require-unicode-regexp': 0,
 		'no-nested-ternary': 0,
-		'no-alert': 0
+		'no-alert': 0,
+		"jsx-a11y/anchor-is-valid": [ "error", {
+			"components": [ "Link" ],
+			"specialLink": [ "hrefLeft", "hrefRight" ],
+			"aspects": [ "invalidHref", "preferButton" ]
+		  }]
 	},
 	parserOptions: {
 		ecmaVersion: 2020,

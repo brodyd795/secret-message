@@ -4,31 +4,28 @@ import {withTransactionWrapper} from '../repositories/transaction-wrapper-reposi
 import {decrypt} from './crypto-service';
 
 const viewService = async ({id, key, iv, hmacKey: clientHmacKey}) => {
-	const {message, hmacKey: originalHmacKey, hmacHash: originalHmacHash} = await viewRepository({
-		id
-	});
+    const {message, hmacKey: originalHmacKey, hmacHash: originalHmacHash} = await viewRepository({
+        id
+    });
 
-	if (originalHmacKey && originalHmacHash) {
-			const result = decrypt({
-				encryptedMessage: message,
-				originalHmacKey,
-				originalHmacHash,
-				key,
-				iv,
-				clientHmacKey,
-			});
-			
-			return {
-				message: result
-			};
-	}
+    if (originalHmacKey && originalHmacHash) {
+        const result = decrypt({
+            encryptedMessage: message,
+            originalHmacKey,
+            originalHmacHash,
+            key,
+            iv,
+            clientHmacKey
+        });
 
-	return {
-		message
-	};
+        return {
+            message: result
+        };
+    }
 
+    return {
+        message
+    };
 };
 
-export default async args => {
-	return withTransactionWrapper(viewService, args);
-};
+export default async (args) => withTransactionWrapper(viewService, args);

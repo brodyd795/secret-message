@@ -1,5 +1,7 @@
 import escape from 'sql-template-strings';
 
+import {ErrorMessages} from '../../../enums/error-messages';
+
 import {conn} from './transaction-wrapper-repository';
 
 export default async ({id}) => {
@@ -9,7 +11,7 @@ export default async ({id}) => {
 
     if (!rows.length) {
         return {
-            message: "This message can no longer be viewed." // don't try to decrypt
+            message: ErrorMessages.ALREADY_VIEWED
         };
     }
     
@@ -21,11 +23,11 @@ export default async ({id}) => {
 
     if (shouldSelfDestruct) {
         return {
-            message: "Message was self-destructed." // don't try to decrypt
+            message: ErrorMessages.SELF_DESTRUCTED
         };
     }
 
-    return { // decrypt
+    return {
         message,
         hmacKey,
         hmacHash
