@@ -47,6 +47,8 @@ const SendForm = () => {
     const [isSelfDestructChecked, setIsSelfDestructChecked] = useState(true);
     const [step, setStep] = useState(0);
     const [errorMessage, setErrorMessage] = useState('');
+    const [success, setSuccess] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     return (
         <>
@@ -70,8 +72,13 @@ const SendForm = () => {
                 <ConfirmForm
                     isSelfDestructChecked={isSelfDestructChecked}
                     setIsSelfDestructChecked={setIsSelfDestructChecked}
+                    email={email}
+                    message={message}
                     step={step}
                     setStep={setStep}
+                    setErrorMessage={setErrorMessage}
+                    setLoading={setLoading}
+                    setSuccess={setSuccess}
                 />}
             {step === SendFormSteps.RESULT &&
                 <Result
@@ -80,6 +87,10 @@ const SendForm = () => {
                     isSelfDestructChecked={isSelfDestructChecked}
                     step={step}
                     setStep={setStep}
+                    setLoading={setLoading}
+                    setSuccess={setSuccess}
+                    loading={loading}
+                    success={success}
                 />}
             {errorMessage &&
                 <ErrorAlert errorMessage={errorMessage} />}

@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
+import sendMessage from '../../utils/send-message';
 import {theme} from '../../tailwind.config';
 
 import FormButtonContainer from './form-buttons';
@@ -10,34 +11,13 @@ const Heading = ({children}) =>
 const Text = ({children}) =>
     <p className={'mt-4'}>{children}</p>;
 
-const Result = ({email, message, isSelfDestructChecked, setStep, step}) => {
-    const [success, setSuccess] = useState(false);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetch('/api/controllers/send', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                message,
-                isSelfDestructChecked
-            })
-        }).then((result) => {
-            setLoading(false);
-            setSuccess(result.status === 200);
-        });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
+const Skeletons = () => {
     const pulse = {
         animation: theme.extend.animation.pulseskeleton
     };
 
-    if (loading) {
-        return (
+    return (
+        <>
             <div className={'flex flex-col w-full'}>
                 <div
                     className={'bg-gray-800 w-3/4 h-5 mb-3'}
@@ -48,8 +28,26 @@ const Result = ({email, message, isSelfDestructChecked, setStep, step}) => {
                     style={pulse}
                 />
             </div>
+        </>
+    );
+};
+
+const Result = ({email, message, isSelfDestructChecked, setStep, step, loading, success, setLoading, setSuccess}) => {
+    if (loading) {
+        return (
+            <Skeletons />
         );
     }
+
+    const handleTryAgain = async () => {
+        const foo = await sendMessage(email, message, isSelfDestructChecked);
+
+        if (foo) {
+            setSuccess(true);
+        }
+
+        setLoading(false);
+    };
 
     return (
         <>
@@ -63,6 +61,12 @@ const Result = ({email, message, isSelfDestructChecked, setStep, step}) => {
                     <>
                         <Heading>{'Something unexpected happened...'}</Heading>
                         <Text>{'Sorry, something went wrong. Please try sending your message again.'}</Text>
+                        <button
+                            type={'button'}
+                            onClick={handleTryAgain}
+                        >
+                            {'Try again'}
+                        </button>
                     </>}
                 <FormButtonContainer
                     backText={'Message'}

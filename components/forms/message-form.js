@@ -10,9 +10,15 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage}) => {
     const handleNext = () => {
         if (message.length) {
             setStep(step + 1);
+            setErrorMessage('');
         } else {
             setErrorMessage('Please enter a secret message.');
         }
+    };
+
+    const handleBack = () => {
+        setStep(step - 1);
+        setErrorMessage('');
     };
 
     const textInput = useRef(null);
@@ -43,7 +49,7 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage}) => {
                 </SlidingDiv>
                 <FormButtonContainer
                     backText={'Email'}
-                    handleBack={() => setStep(step - 1)}
+                    handleBack={handleBack}
                     nextText={'Confirm'}
                     handleNext={handleNext}
                 />

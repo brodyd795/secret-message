@@ -1,13 +1,24 @@
 import React, {useEffect} from 'react';
 
 import SlidingDiv from '../sliding-div';
+import sendMessage from '../../utils/send-message';
 
 import FormButtonContainer from './form-buttons';
 import {FormHeader} from './form-text';
 
-const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, setStep}) => {
-    const handleNext = () => {
+const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, setStep, setErrorMessage, email, message, setLoading, setSuccess}) => {
+    const handleNext = async () => {
         setStep(step + 1);
+
+        const result = await sendMessage(email, message, isSelfDestructChecked);
+
+        setLoading(false);
+        setSuccess(result.status === 200);
+    };
+
+    const handleBack = () => {
+        setStep(step - 1);
+        setErrorMessage('');
     };
 
     const myListener = (e) => {
@@ -44,7 +55,7 @@ const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, set
                 </SlidingDiv>
                 <FormButtonContainer
                     backText={'Message'}
-                    handleBack={() => setStep(step - 1)}
+                    handleBack={handleBack}
                     nextText={'Send'}
                     handleNext={handleNext}
                 />
