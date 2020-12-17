@@ -19,6 +19,7 @@ export default ({Component, pageProps}) =>
                     color: ${theme.extend.colors.gold.DEFAULT};
                     font-size: 16px;
                     background-color: #03060c;
+                    font-family: 'JetBrains Mono', monospace;
                 }
                 
                 html,
