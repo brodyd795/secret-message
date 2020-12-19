@@ -40,36 +40,36 @@ const Header = () => {
             <AnimatePresence>
                 {isOpen &&
                     <motion.div
+                        style={{overflow: 'hidden'}}
                         initial={{
                             opacity: 0,
-                            x: -200
+                            height: 0
                         }}
                         animate={{
                             opacity: 1,
-                            x: 0
+                            height: '100vh'
                         }}
                         exit={{
                             opacity: 0,
-                            x: -200
+                            height: 0
                         }}
                         transition={{
+                            duration: 2,
                             type: 'spring',
-                            mass: 0.5
+                            mass: 0.3
                         }}
+                        className={'h-screen flex flex-grow z-10 left-0 overflow-x-hidden md:hidden'}
                     >
+
                         <div
-                            className={`h-screen flex flex-grow z-10 left-0 overflow-x-hidden md:hidden`}
+                            className={'w-full flex flex-col items-center justify-center bg-gray-800'}
                         >
-                            <div
-                                className={'w-full flex flex-col items-center justify-center bg-gray-800'}
-                            >
-                                <A href={'/send'}>{'Send message'}</A>
-                                <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
-                                <A href={'#'}>{'About'}</A>
-                            </div>
+                            <A href={'/send'}>{'Send message'}</A>
+                            <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
+                            <A href={'#'}>{'About'}</A>
                         </div>
-                    </motion.div>
-                }
+                    </motion.div>}
+
             </AnimatePresence>
             <div
                 className={'hidden md:block'}
