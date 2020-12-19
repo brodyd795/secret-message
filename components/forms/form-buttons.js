@@ -17,7 +17,7 @@ const BackButton = ({backText, handleBack}) => (
             {backText &&
                 <button
                     type={'button'}
-                    className={'flex flex-col justify-center items-center m-2 p-2 rounded border w-full'}
+                    className={'flex flex-col justify-center items-center m-2 p-2 rounded border w-full  transform hover:scale-105 transition duration-150 ease-in-out bg-gray-900'}
                     onClick={handleBack}
                 >
                     <LeftArrowIcon className={'h-6'} />
@@ -33,7 +33,7 @@ const NextButton = ({nextText, handleNext}) => (
             {nextText &&
                 <button
                     type={'submit'}
-                    className={'flex flex-col justify-center items-center m-2 p-2 rounded border w-full'}
+                    className={'flex flex-col justify-center items-center m-2 p-2 rounded border w-full transform hover:scale-105 transition duration-150 ease-in-out bg-gray-900'}
                     onClick={(e) => {
                         e.preventDefault();
 
@@ -48,7 +48,7 @@ const NextButton = ({nextText, handleNext}) => (
 );
 
 const FormButtonContainer = ({backText, handleBack, nextText, handleNext}) =>
-    <div className={'w-screen flex justify-between fixed bottom-0 left-0 md:static md:justify-center'}>
+    <div className={'w-screen flex justify-between absolute bottom-0 left-0'}>
         <BackButton
             backText={backText}
             handleBack={handleBack}

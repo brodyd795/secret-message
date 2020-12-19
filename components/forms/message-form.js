@@ -33,10 +33,10 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
 
     return (
         <>
-            <Form>
+            <form className={'flex flex-col w-full h-60 items-center'}>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Enter secret message'}</FormHeader>
-                    <div className={'flex justify-center w-3/4 sm:w-2/5 md:w-1/3 lg:w-1/4'}>
+                    <div className={'flex justify-center w-3/4 md:w-2/3 lg:w-1/2'}>
                         <textarea
                             id={'message'}
                             value={message}
@@ -46,7 +46,7 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
                                 setErrorMessage('');
                                 setMessage(e.target.value);
                             }}
-                            className={'my-4 p-1 rounded w-full text-gray-900'}
+                            className={'my-4 p-1 rounded w-full text-gray-900 mt-10'}
                             ref={textInput}
                             rows={5}
                         />
@@ -59,7 +59,7 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
                     nextText={'Confirm'}
                     handleNext={handleNext}
                 />
-            </Form>
+            </form>
         </>
     );
 };

@@ -40,7 +40,7 @@ const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, set
 
     return (
         <>
-            <Form>
+            <form className={'flex flex-col w-full h-60 items-center justify-center'}>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Are you sure?'}</FormHeader>
                     <div className={''}>
@@ -62,7 +62,7 @@ const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, set
                     nextText={'Send'}
                     handleNext={handleNext}
                 />
-            </Form>
+            </form>
         </>
     );
 };
