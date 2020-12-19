@@ -6,10 +6,11 @@ import {theme} from '../tailwind.config';
 import BarsIcon from '../public/bars.svg';
 import TimesIcon from '../public/times.svg';
 
-const A = ({children, href}) =>
+const A = ({children, href, target = ''}) =>
     <Link href={href}>
         <a
             className={'p-3 uppercase w-full md:w-auto md:inline-block text-center hover:text-gray-100 transition-colors'}
+            target={target}
         >
             {children}
         </a>
@@ -65,7 +66,7 @@ const Header = () => {
                             className={'w-full flex flex-col items-center justify-center bg-gray-800'}
                         >
                             <A href={'/send'}>{'Send message'}</A>
-                            <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
+                            <A target={'_blank'} href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
                             <A href={'#'}>{'About'}</A>
                         </div>
                     </motion.div>}
@@ -75,7 +76,12 @@ const Header = () => {
                 className={'hidden md:block'}
             >
                 <A href={'/send'}>{'Send message'}</A>
-                <A href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
+                <A
+                    target={'_blank'}
+                    href={'https://github.com/brodyd795/secret-message'}
+                >
+                    {'Source Code'}
+                </A>
                 <A href={'/about'}>{'About'}</A>
             </div>
         </header>

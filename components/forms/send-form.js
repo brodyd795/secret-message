@@ -35,7 +35,7 @@ const ErrorAlert = ({errorMessage}) =>
         exit="exiting"
         variants={variants}
         layout
-        className={'absolute -bottom-12 bg-red-300 border rounded p-2 flex justify-center items-center'}
+        className={'absolute -bottom-12 bg-red-300 border rounded p-2 flex justify-center items-center text-red-900'}
     >
         <AlertIcon className={'h-4 w-4 mr-2'} />
         <p className={'m-0'}>{errorMessage}</p>

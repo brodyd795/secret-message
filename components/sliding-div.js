@@ -40,25 +40,3 @@ const SlidingDiv = ({children, motionKey}) => (
 );
 
 export default SlidingDiv;
-
-// WIP framer motion component
-/*
- * <AnimatePresence initial={false}>
- *                     <motion.div
- *                         key={page}
- *                         custom={direction}
- *                         variants={variants}
- *                         initial="enter"
- *                         animate="center"
- *                         exit="exit"
- *                         transition={{
- *                             x: {type: 'spring', stiffness: 300, damping: 200},
- *                             opacity: {duration: 0.2}
- *                         }}
- *                     >
- *                         {page === 0 ? <p>Zero</p> : <p>Not Zero</p>}
- *                     </motion.div>
- *                 </AnimatePresence>
- *
- */
-

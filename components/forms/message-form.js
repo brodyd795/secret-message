@@ -45,6 +45,7 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage}) => {
                         }}
                         className={'my-4 p-1 rounded'}
                         ref={textInput}
+                        rows={'3'}
                     />
                 </SlidingDiv>
                 <FormButtonContainer

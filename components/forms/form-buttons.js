@@ -4,7 +4,7 @@ import LeftArrowIcon from '../../public/left-arrow.svg';
 import RightArrowIcon from '../../public/right-arrow.svg';
 
 const ButtonContainer = ({children}) =>
-    <div className={'flex h-20 w-1/2 sm:w-2/5'}>
+    <div className={'flex h-20 w-1/2 sm:w-2/5 md:m-4'}>
         {children}
     </div>;
 
@@ -48,7 +48,7 @@ const NextButton = ({nextText, handleNext}) => (
 );
 
 const FormButtonContainer = ({backText, handleBack, nextText, handleNext}) =>
-    <div className={'w-screen flex justify-between fixed bottom-0 left-0'}>
+    <div className={'w-screen flex justify-between fixed bottom-0 left-0 md:static md:justify-center'}>
         <BackButton
             backText={backText}
             handleBack={handleBack}

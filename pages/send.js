@@ -7,10 +7,8 @@ import SendForm from '../components/forms/send-form';
 const Send = () =>
     <Page title={'Send | Secret Message'}>
         <Header />
-        <div className={'h-screen flex flex-col justify-center items-center'}>
-            <div className={'relative flex justify-center w-full'}>
-                <SendForm />
-            </div>
+        <div className={'flex flex-1 justify-center items-center'}>
+            <SendForm />
         </div>
     </Page>;
 

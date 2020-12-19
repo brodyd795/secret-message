@@ -27,7 +27,7 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage}) => {
 
     return (
         <>
-            <form className={'flex justify-center w-full'}>
+            <form className={'flex flex-col justify-center w-full'}>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Enter recipient email address'}</FormHeader>
                     <div className={'flex justify-center w-3/4 sm:w-2/5 md:w-1/3 lg:1/4'}>
@@ -42,7 +42,7 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage}) => {
                                 setEmail(e.target.value);
                             }}
                             required
-                            className={'my-4 p-1 rounded w-full'}
+                            className={'my-4 p-1 rounded w-full text-gray-900 w-full'}
                             ref={textInput}
                             autoComplete={'off'}
                         />
