@@ -9,7 +9,7 @@ import TimesIcon from '../public/times.svg';
 const A = ({children, href}) =>
     <Link href={href}>
         <a
-            className={'p-3 uppercase w-full md:w-auto md:inline-block text-center'}
+            className={'p-3 uppercase w-full md:w-auto md:inline-block text-center hover:text-gray-100 transition-colors'}
         >
             {children}
         </a>
