@@ -5,8 +5,10 @@ import sendMessage from '../../utils/send-message';
 
 import FormButtonContainer from './form-buttons';
 import {FormHeader} from './form-text';
+import ErrorAlert from './error-alert';
+import Form from './form';
 
-const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, setStep, setErrorMessage, email, message, setLoading, setSuccess}) => {
+const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, setStep, setErrorMessage, errorMessage, email, message, setLoading, setSuccess}) => {
     const handleNext = async () => {
         setStep(step + 1);
 
@@ -38,7 +40,7 @@ const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, set
 
     return (
         <>
-            <form className={'w-full'}>
+            <Form>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Are you sure?'}</FormHeader>
                     <div className={''}>
@@ -53,13 +55,14 @@ const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, set
                         </label>
                     </div>
                 </SlidingDiv>
+                {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
                 <FormButtonContainer
                     backText={'Message'}
                     handleBack={handleBack}
                     nextText={'Send'}
                     handleNext={handleNext}
                 />
-            </form>
+            </Form>
         </>
     );
 };

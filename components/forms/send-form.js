@@ -1,45 +1,11 @@
 import React, {useState} from 'react';
-import {motion} from 'framer-motion';
 
 import {SendFormSteps} from '../../enums/form-steps';
-import AlertIcon from '../../public/alert.svg';
 
 import ConfirmForm from './confirm-form';
 import EmailForm from './email-form';
 import MessageForm from './message-form';
 import Result from './result-form';
-
-const variants = {
-    hidden: {
-        opacity: 0.1,
-        y: 10
-    },
-    visible: {
-        opacity: 1,
-        transition: {
-            duration: 0.1
-        },
-        y: 0
-    },
-    exiting: {
-        opacity: 0.1,
-        y: 10
-    }
-};
-
-const ErrorAlert = ({errorMessage}) =>
-    <motion.div
-        key={'asdf'}
-        initial="hidden"
-        animate="visible"
-        exit="exiting"
-        variants={variants}
-        layout
-        className={'absolute -bottom-12 bg-red-300 border rounded p-2 flex justify-center items-center text-red-900'}
-    >
-        <AlertIcon className={'h-4 w-4 mr-2'} />
-        <p className={'m-0'}>{errorMessage}</p>
-    </motion.div>;
 
 const SendForm = () => {
     const [email, setEmail] = useState('');
@@ -59,6 +25,7 @@ const SendForm = () => {
                     step={step}
                     setStep={setStep}
                     setErrorMessage={setErrorMessage}
+                    errorMessage={errorMessage}
                 />}
             {step === SendFormSteps.MESSAGE &&
                 <MessageForm
@@ -67,6 +34,7 @@ const SendForm = () => {
                     setMessage={setMessage}
                     step={step}
                     setStep={setStep}
+                    errorMessage={errorMessage}
                 />}
             {step === SendFormSteps.CONFIRM &&
                 <ConfirmForm
@@ -79,6 +47,7 @@ const SendForm = () => {
                     setErrorMessage={setErrorMessage}
                     setLoading={setLoading}
                     setSuccess={setSuccess}
+                    errorMessage={errorMessage}
                 />}
             {step === SendFormSteps.RESULT &&
                 <Result
@@ -92,8 +61,8 @@ const SendForm = () => {
                     loading={loading}
                     success={success}
                 />}
-            {errorMessage &&
-                <ErrorAlert errorMessage={errorMessage} />}
+            {/* {errorMessage &&
+                <ErrorAlert errorMessage={errorMessage} />} */}
         </>
     );
 };
