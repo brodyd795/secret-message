@@ -19,7 +19,8 @@ const styles = {
         width: '100vw',
         height: '100vh',
         backgroundColor: 'white',
-        color: 'gray'
+        color: 'gray',
+        display: 'flex'
     },
     rowContainer: {
         display: 'flex',
@@ -88,7 +89,7 @@ const Row = ({colors, heading}) =>
     <div style={styles.rowContainer}>
         <span style={styles.rowHeading}>{heading}</span>
         <div style={styles.row}>
-            {colors.map((color) =>
+            {colors && colors.map((color) =>
                 <Color
                     key={color}
                     color={color}
@@ -113,7 +114,7 @@ const colors = {
         '949494',
         'b8b8b8',
         'd1d1d1'
-    ],
+    ]
     // danger: [
 
     // ]
@@ -161,22 +162,99 @@ const PickerContainer = () => {
                         </div>
                         <span style={{...styles.pickerCode, color: pickerColor}}>{pickerColor}</span>
                     </div>
-                </div>
-            }
+                </div>}
         </div>
     );
 };
 
-const Colors = () =>
-    <div style={styles.container}>
-        {Object.keys(colors).map((category) => (
-            <Row
-                key={category}
-                colors={colors[category]}
-                heading={category}
-            />
-        ))}
-        <PickerContainer />
-    </div>;
+const Colors = () => {
+    const [colorPalette, setColorPalette] = useState({});
+    const [colorToAdd, setColorToAdd] = useState(null);
+    const [categoryToAdd, setCategoryToAdd] = useState(null);
+
+    const addCategory = () => {
+        const newPalette = {
+            ...colorPalette,
+            [categoryToAdd]: []
+        };
+
+        setColorPalette(newPalette);
+    };
+
+    const addColor = (category) => {
+        const newPalette = {
+            ...colorPalette,
+            [colorPalette[category]]: [
+                ...colorPalette[category],
+                colorToAdd
+            ]
+        };
+
+        setColorPalette(newPalette);
+        setColorToAdd('');
+    };
+
+    return (
+        <div style={styles.container}>
+            <div>
+                {colorPalette && Object.keys(colorPalette).map((category) => (
+                    <Row
+                        key={category}
+                        colors={colorPalette[category]}
+                        heading={category}
+                    />
+                ))}
+                <PickerContainer />
+            </div>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
+                <input
+                    type={'text'}
+                    value={categoryToAdd}
+                    onChange={(e) => setCategoryToAdd(e.target.value)}
+                />
+                <input
+                    type={'submit'}
+                    value={'Add category'}
+                    onClick={addCategory}
+                />
+                {Object.keys(colorPalette).map((category) => {
+                    console.log({category});
+
+                    if (!category.length) {
+                        return null;
+                    };
+
+                    return (
+                        <>
+                            <h3>{category}</h3>
+                            {colorPalette[category].map((color) => (
+                                <>
+                                    <span>{color}</span>
+                                    <button
+                                        type={'button'}
+                                        // onClick={() => deleteColor(category, color)}
+                                    >
+                                        {'Delete'}
+                                    </button>
+                                </>
+                            ))}
+                            <input
+                                type={'text'}
+                                value={colorToAdd}
+                                onChange={(e) => setColorToAdd(e.target.value)}
+                                placeholder={'New color...'}
+                            />
+                            <input
+                                type={'submit'}
+                                value={'Add color'}
+                                onClick={() => addColor(category)}
+                            />
+                        </>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
 
 export default Colors;
