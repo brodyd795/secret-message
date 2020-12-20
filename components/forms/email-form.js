@@ -1,14 +1,17 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import {SendFormSteps} from '../../enums/form-steps';
+import useWindowDimensions from '../../utils/useWindowDimensions';
 import SlidingDiv from '../sliding-div';
 
 import ErrorAlert from './error-alert';
-import Form from './form';
 import FormButtonContainer from './form-buttons';
 import {FormHeader} from './form-text';
 
 const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessage}) => {
+    const [isFocused, setIsFocused] = useState(false);
+    const {width} = useWindowDimensions();
+    const shouldRenderButtons = !(width < 768 && isFocused);
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     const handleNext = () => {
@@ -47,16 +50,19 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessag
                             className={'my-4 p-1 rounded w-full text-gray-900 w-full mt-10'}
                             ref={textInput}
                             autoComplete={'off'}
+                            onFocus={() => setIsFocused(true)}
+                            onBlur={() => setIsFocused(false)}
                         />
                     </div>
                 </SlidingDiv>
                 {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
-                <FormButtonContainer
-                    backText={''}
-                    handleBack={() => setStep(step - 1)}
-                    nextText={'Secret Message'}
-                    handleNext={handleNext}
-                />
+                {shouldRenderButtons &&
+                    <FormButtonContainer
+                        backText={''}
+                        handleBack={() => setStep(step - 1)}
+                        nextText={'Secret Message'}
+                        handleNext={handleNext}
+                    />}
             </form>
         </>
     );

@@ -1,14 +1,18 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import {SendFormSteps} from '../../enums/form-steps';
 import SlidingDiv from '../sliding-div';
+import useWindowDimensions from '../../utils/useWindowDimensions';
 
 import ErrorAlert from './error-alert';
-import Form from './form';
 import FormButtonContainer from './form-buttons';
 import {FormHeader} from './form-text';
 
 const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, errorMessage}) => {
+    const [isFocused, setIsFocused] = useState(false);
+    const {width} = useWindowDimensions();
+    const shouldRenderButtons = !(width < 768 && isFocused);
+
     const handleNext = () => {
         if (message.length) {
             setStep(step + 1);
@@ -28,8 +32,10 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
     useEffect(() => {
         if (step === SendFormSteps.MESSAGE) {
             textInput.current.focus();
+            setIsFocused(true);
         }
     }, [step]);
+    console.log(width);
 
     return (
         <>
@@ -46,19 +52,22 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
                                 setErrorMessage('');
                                 setMessage(e.target.value);
                             }}
-                            className={'my-4 p-1 rounded w-full text-gray-900 mt-10'}
+                            className={'my-4 p-1 rounded w-full text-gray-900 mt-10 bg-gray-100'}
                             ref={textInput}
                             rows={5}
+                            onFocus={() => setIsFocused(true)}
+                            onBlur={() => setIsFocused(false)}
                         />
                     </div>
                 </SlidingDiv>
                 {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
-                <FormButtonContainer
-                    backText={'Email'}
-                    handleBack={handleBack}
-                    nextText={'Confirm'}
-                    handleNext={handleNext}
-                />
+                {shouldRenderButtons &&
+                    <FormButtonContainer
+                        backText={'Email'}
+                        handleBack={handleBack}
+                        nextText={'Confirm'}
+                        handleNext={handleNext}
+                    />}
             </form>
         </>
     );

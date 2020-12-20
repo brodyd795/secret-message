@@ -21,13 +21,17 @@ const Header = () => {
 
     return (
         <header
-            className={'md:h-auto w-full flex flex-col fixed md:flex-row md:justify-between z-10 bg-gray-800'}
+            className={'md:h-16 w-full flex flex-col fixed md:flex-row md:justify-between md:items-center z-10 bg-gray-800'}
         >
             <div
                 className={'w-full md:w-auto flex justify-between items-center p-2'}
             >
                 <Link href={'/'}>
-                    <a>{'HOME'}</a>
+                    <a
+                        className={'p-3 uppercase md:w-auto md:inline-block text-center hover:text-gray-100 transition-colors'}
+                    >
+                        {'HOME'}
+                    </a>
                 </Link>
                 <button
                     type={'button'}
@@ -66,7 +70,12 @@ const Header = () => {
                             className={'w-full flex flex-col items-center justify-center bg-gray-800'}
                         >
                             <A href={'/send'}>{'Send message'}</A>
-                            <A target={'_blank'} href={'https://github.com/brodyd795/secret-message'}>{'Source Code'}</A>
+                            <A
+                                target={'_blank'}
+                                href={'https://github.com/brodyd795/secret-message'}
+                            >
+                                {'Source Code'}
+                            </A>
                             <A href={'#'}>{'About'}</A>
                         </div>
                     </motion.div>}

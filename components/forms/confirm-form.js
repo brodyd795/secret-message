@@ -43,15 +43,15 @@ const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, set
             <form className={'flex flex-col w-full h-60 items-center justify-center'}>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Are you sure?'}</FormHeader>
-                    <div className={''}>
-                        <label className="flex cursor-pointer items-center">
+                    <div className={'mt-10'}>
+                        <label className="flex flex-col cursor-pointer items-center justify-between">
+                            <span className="m-2">{`Self-destruct: ${isSelfDestructChecked ? 'After 15min' : 'Never'}`}</span>
                             <input
                                 className="checkbox cursor-pointer relative w-10 h-5 transition-all duration-200 ease-in-out bg-gray-400 rounded-full shadow-inner outline-none appearance-none"
                                 type={'checkbox'}
                                 checked={isSelfDestructChecked}
                                 onClick={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
                             />
-                            <span className="ml-2">{`Self-destruct ${isSelfDestructChecked ? 'after 15min' : 'never'}`}</span>
                         </label>
                     </div>
                 </SlidingDiv>
