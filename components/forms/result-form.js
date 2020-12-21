@@ -40,9 +40,9 @@ const Result = ({email, message, isSelfDestructChecked, setStep, step, loading, 
     }
 
     const handleTryAgain = async () => {
-        const foo = await sendMessage(email, message, isSelfDestructChecked);
+        const result = await sendMessage(email, message, isSelfDestructChecked);
 
-        if (foo) {
+        if (result.message) {
             setSuccess(true);
         }
 

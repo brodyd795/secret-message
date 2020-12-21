@@ -35,7 +35,6 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
             setIsFocused(true);
         }
     }, [step]);
-    console.log(width);
 
     return (
         <>
