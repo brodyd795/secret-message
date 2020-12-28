@@ -1,0 +1,27 @@
+resources:
+  - name: master
+    type: git
+    source:
+      uri: https://github.com/brodyd795/secret-message.git
+      branch: master
+
+jobs:
+  - name: build
+    serial: true
+    plan:
+      - get: master
+        trigger: true
+      - task: build
+        file: master/ci/tasks/build.yml
+  - name: deploy-dev
+    serial: true
+    plan:
+      - task: deploy
+        passed:
+          - build
+        trigger: true
+        file: master/ci/tasks/deploy.yml
+        params:
+          ENVIRONMENT: dev
+          DEPLOY_WEBHOOK_PASSWORD: ((deploy_webhook_password))
+          PROJECT: secret_message
