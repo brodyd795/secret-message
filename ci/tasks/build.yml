@@ -10,5 +10,5 @@ inputs:
   - name: repo
 
 run:
-  dir: repo
-  path: ci/scripts/build.sh
+  path: /bin/sh
+  args: ['repo/ci/scripts/build.sh']
