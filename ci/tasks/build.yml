@@ -3,11 +3,12 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: node
-    tag: '12.4.0-alpine'
+    repository: alpine
+    tag: latest
 
 inputs:
   - name: repo
 
 run:
-  path: repo/ci/scripts/build.sh
+  dir: repo
+  path: ci/scripts/build.sh
