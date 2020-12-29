@@ -7,7 +7,7 @@ image_resource:
     tag: '12.4.0-alpine'
 
 inputs:
-  - name: master
+  - name: repo
 
 run:
-  path: master/ci/scripts/build.sh
+  path: repo/ci/scripts/build.sh

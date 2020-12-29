@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
-cd master
+cd repo
 yarn
 yarn build
