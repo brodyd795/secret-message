@@ -1,3 +1,5 @@
 #!/usr/bin/env sh
 
-echo "Hello world!"
+cd repo
+npm install
+npm run build
