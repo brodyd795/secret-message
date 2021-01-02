@@ -7,10 +7,23 @@ resources:
       branch: master
 
 jobs:
-  - name: deploy
+  - name: build
     public: true
     plan:
       - get: repo
         trigger: true
       - task: build
         file: repo/ci/tasks/build.yml
+  - name: deploy-dev
+    plan:
+      - get: repo
+        passed:
+          - build
+        trigger: true
+      - task: deploy-dev
+        file: repo/ci/tasks/deploy.yml
+        params:
+          ENVIRONMENT: dev
+          DEPLOY_WEBHOOK_PASSWORD: ((deploy_webhook_password))
+          PROJECT: secret-message
+    on_success:
