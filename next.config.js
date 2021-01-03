@@ -6,7 +6,7 @@ module.exports = withPWA({
         dest: 'public',
         runtimeCaching
     },
-    webpack(config) {
+    webpack: (config) => {
         config.module.rules.push({
             test: /\.svg$/,
             issuer: {
