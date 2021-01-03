@@ -19,3 +19,7 @@
 # secrets
 .env
 /ci/pipeline-secrets.yml
+
+# PWA auto-gen
+/public/sw*
+/public/workbox*
