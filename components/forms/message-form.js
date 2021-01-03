@@ -1,8 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {isMobile} from 'react-device-detect';
 
 import {SendFormSteps} from '../../enums/form-steps';
 import SlidingDiv from '../sliding-div';
-import useWindowDimensions from '../../utils/useWindowDimensions';
 
 import ErrorAlert from './error-alert';
 import FormButtonContainer from './form-buttons';
@@ -10,8 +10,7 @@ import {FormHeader} from './form-text';
 
 const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, errorMessage}) => {
     const [isFocused, setIsFocused] = useState(false);
-    const {width} = useWindowDimensions();
-    const shouldRenderButtons = !(width < 768 && isFocused);
+    const shouldRenderButtons = !(isMobile && isFocused);
 
     const handleNext = () => {
         if (message.length) {

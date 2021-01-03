@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {isMobile} from 'react-device-detect';
 
 import {SendFormSteps} from '../../enums/form-steps';
-import useWindowDimensions from '../../utils/useWindowDimensions';
 import SlidingDiv from '../sliding-div';
 
 import ErrorAlert from './error-alert';
@@ -9,9 +9,8 @@ import FormButtonContainer from './form-buttons';
 import {FormHeader} from './form-text';
 
 const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessage}) => {
-    const [isFocused, setIsFocused] = useState(false);
-    const {width} = useWindowDimensions();
-    const shouldRenderButtons = !(width < 768 && isFocused);
+    const [isFocused, setIsFocused] = useState(true);
+    const shouldRenderButtons = !(isMobile && isFocused);
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     const handleNext = () => {
