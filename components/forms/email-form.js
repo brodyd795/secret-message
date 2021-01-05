@@ -37,7 +37,7 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessag
                     <div className={'flex justify-center w-3/4 sm:w-2/5 md:w-1/3 lg:w-1/4'}>
                         <input
                             id={'email'}
-                            type={'text'}
+                            type={'email'}
                             value={email}
                             aria-label={'email'}
                             placeholder={'me@example.com'}
@@ -51,6 +51,13 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessag
                             autoComplete={'off'}
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
+                            onKeyDown={(e) => {
+                                e.preventDefault();
+
+                                if (e.key === 'Enter') {
+                                    handleNext();
+                                }
+                            }}
                         />
                     </div>
                 </SlidingDiv>
