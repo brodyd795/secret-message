@@ -16,5 +16,6 @@ module.exports = withPWA({
         });
 
         return config;
-    }
+    },
+    basePath: '/secret-message'
 });
