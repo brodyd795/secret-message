@@ -45,15 +45,12 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessag
                                 setErrorMessage('');
                                 setEmail(e.target.value);
                             }}
-                            required
                             className={'my-4 p-1 rounded w-full text-gray-900 w-full mt-10'}
                             ref={textInput}
                             autoComplete={'off'}
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                             onKeyDown={(e) => {
-                                e.preventDefault();
-
                                 if (e.key === 'Enter') {
                                     handleNext();
                                 }
