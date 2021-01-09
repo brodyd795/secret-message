@@ -1,8 +1,0 @@
-{
-    "name": "Secret Message App",
-    "short_name": "Secret Message",
-    "display": "fullscreen",
-    "orientation": "portrait",
-    "scope": "/",
-    "start_url": "/"
-}

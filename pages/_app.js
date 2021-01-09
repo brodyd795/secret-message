@@ -17,11 +17,6 @@ export default ({Component, pageProps}) =>
                 content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
             />
             <title>Secret Message App</title>
-
-            <link
-                rel="manifest"
-                href="/manifest.json"
-            />
         </Head>
         <Component {...pageProps} />
         <style
