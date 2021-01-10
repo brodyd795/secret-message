@@ -1,5 +1,5 @@
-const sendMessage = async (email, message, isSelfDestructChecked) => {
-    const result = await fetch('/secret-message/api/controllers/send', {
+const sendMessage = async (email, message, isSelfDestructChecked) =>
+    fetch('/secret-message/api/controllers/send', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -10,8 +10,5 @@ const sendMessage = async (email, message, isSelfDestructChecked) => {
             isSelfDestructChecked
         })
     });
-
-    return result.json();
-};
 
 export default sendMessage;
