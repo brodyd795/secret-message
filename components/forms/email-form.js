@@ -31,7 +31,13 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessag
 
     return (
         <>
-            <form className={'flex flex-col w-full h-60 items-center'}>
+            <form
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleNext();
+                }}
+                className={'flex flex-col w-full h-60 items-center'}
+            >
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Enter recipient email address'}</FormHeader>
                     <div className={'flex justify-center w-3/4 sm:w-2/5 md:w-1/3 lg:w-1/4'}>
@@ -50,11 +56,6 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessag
                             autoComplete={'off'}
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
-                            onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                    handleNext();
-                                }
-                            }}
                         />
                     </div>
                 </SlidingDiv>

@@ -32,10 +32,6 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
         if (step === SendFormSteps.MESSAGE) {
             textInput.current.focus();
             setIsFocused(true);
-
-            if (message === '\n') {
-                setMessage('');
-            }
         }
     }, [step]);
 
