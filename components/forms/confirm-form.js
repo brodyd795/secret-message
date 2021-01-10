@@ -6,7 +6,6 @@ import sendMessage from '../../utils/send-message';
 import FormButtonContainer from './form-buttons';
 import {FormHeader} from './form-text';
 import ErrorAlert from './error-alert';
-import Form from './form';
 
 const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, setStep, setErrorMessage, errorMessage, email, message, setLoading, setSuccess}) => {
     const handleNext = async () => {
