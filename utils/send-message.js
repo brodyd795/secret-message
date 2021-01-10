@@ -1,5 +1,5 @@
 const sendMessage = async (email, message, isSelfDestructChecked) => {
-    const result = await fetch('/api/controllers/send', {
+    const result = await fetch('/secret-message/api/controllers/send', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

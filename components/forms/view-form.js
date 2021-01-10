@@ -67,7 +67,7 @@ const ViewForm = () => {
     const handleConfirm = async () => {
         setStep(ViewFormSteps.VIEW);
 
-        const response = await await fetch(`http://localhost:3000/api/controllers/view?id=${id}&key=${key}&iv=${iv}&hmacKey=${hmacKey}`);
+        const response = await fetch(`/secret-message/api/controllers/view?id=${id}&key=${key}&iv=${iv}&hmacKey=${hmacKey}`);
         const json = await response.json();
         const result = json.message;
 
