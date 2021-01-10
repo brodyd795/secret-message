@@ -15,7 +15,18 @@ export default async (req, res) => {
             isSelfDestructChecked
         });
 
-        const link = `http://localhost:3000/view?id=${guid}&key=${key}&iv=${iv}&hmacKey=${hmacKey}`;
+        const env = process.env.ENVIRONMENT;
+        let basePath;
+
+        if (env === 'local') {
+            basePath = 'http://localhost:3000';
+        } else if (env === 'dev') {
+            basePath = 'https://dev.dingel.dev';
+        } else {
+            basePath = 'https://dingel.dev';
+        }
+
+        const link = `${basePath}/secret-message/view?id=${guid}&key=${key}&iv=${iv}&hmacKey=${hmacKey}`;
 
         await sendEmailService(email, link, isSelfDestructChecked);
 
