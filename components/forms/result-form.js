@@ -1,9 +1,8 @@
 import React from 'react';
+import Link from 'next/link';
 
 import sendMessage from '../../utils/send-message';
 import {theme} from '../../tailwind.config';
-
-import FormButtonContainer from './form-buttons';
 
 const Heading = ({children}) =>
     <h3 className={'text-center text-xl'}>{children}</h3>;
@@ -17,22 +16,24 @@ const Skeletons = () => {
     };
 
     return (
-        <>
-            <div className={'flex flex-col w-full'}>
-                <div
-                    className={'bg-gray-800 w-3/4 h-5 mb-3'}
-                    style={pulse}
-                />
-                <div
-                    className={'bg-gray-800 w-full h-5'}
-                    style={pulse}
-                />
-            </div>
-        </>
+        <div className={'flex flex-col w-full sm:w-1/2 p-8'}>
+            <div
+                className={'bg-gray-800 w-3/4 h-5 mb-3'}
+                style={pulse}
+            />
+            <div
+                className={'bg-gray-800 w-full h-5 mb-3'}
+                style={pulse}
+            />
+            <div
+                className={'bg-gray-800 w-5/6 h-5'}
+                style={pulse}
+            />
+        </div>
     );
 };
 
-const Result = ({email, message, isSelfDestructChecked, setStep, step, loading, success, setLoading, setSuccess}) => {
+const Result = ({email, message, isSelfDestructChecked, loading, success, setLoading, setSuccess}) => {
     if (loading) {
         return (
             <Skeletons />
@@ -40,12 +41,11 @@ const Result = ({email, message, isSelfDestructChecked, setStep, step, loading, 
     }
 
     const handleTryAgain = async () => {
+        setLoading(true);
+
         const result = await sendMessage(email, message, isSelfDestructChecked);
 
-        if (result.message) {
-            setSuccess(true);
-        }
-
+        setSuccess(result.status === 200);
         setLoading(false);
     };
 
@@ -53,26 +53,31 @@ const Result = ({email, message, isSelfDestructChecked, setStep, step, loading, 
         <>
             <div>
                 {success ?
-                    <>
+                    <div className={'m-8 flex flex-col'}>
                         <Heading>{'Success!'}</Heading>
-                        <Text>{`Remind ${email} to check their email for your message. ${isSelfDestructChecked && 'It will self-destruct in 15 minutes.'} `}</Text>
-                    </>
+                        <Text>{`Remind ${email} to check their email for your message.`}</Text>
+                        {isSelfDestructChecked && <Text>{'It will self-destruct in 15 minutes.'}</Text>}
+                        <Link href={'/'}>
+                            <button
+                                type={'button'}
+                                className={'mt-4 self-center flex flex-col justify-center items-center m-2 p-2 rounded border w-48 transform hover:scale-105 transition duration-150 ease-in-out bg-gray-900'}
+                            >
+                                {'Home'}
+                            </button>
+                        </Link>
+                    </div>
                     :
-                    <>
+                    <div className={'m-8 flex flex-col'}>
                         <Heading>{'Something unexpected happened...'}</Heading>
                         <Text>{'Sorry, something went wrong. Please try sending your message again.'}</Text>
                         <button
                             type={'button'}
                             onClick={handleTryAgain}
+                            className={'mt-4 self-center flex flex-col justify-center items-center m-2 p-2 rounded border w-48 transform hover:scale-105 transition duration-150 ease-in-out bg-gray-900'}
                         >
                             {'Try again'}
                         </button>
-                    </>}
-                <FormButtonContainer
-                    backText={'Message'}
-                    handleBack={() => setStep(step - 1)}
-                    nextText={''}
-                />
+                    </div>}
             </div>
         </>
     );
