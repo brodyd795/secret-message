@@ -2,36 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 
 import sendMessage from '../../utils/send-message';
-import {theme} from '../../tailwind.config';
+import Skeletons from '../skeletons';
 
 const Heading = ({children}) =>
     <h3 className={'text-center text-xl'}>{children}</h3>;
 
 const Text = ({children}) =>
     <p className={'mt-4'}>{children}</p>;
-
-const Skeletons = () => {
-    const pulse = {
-        animation: theme.extend.animation.pulseskeleton
-    };
-
-    return (
-        <div className={'flex flex-col w-full sm:w-1/2 p-8'}>
-            <div
-                className={'bg-gray-800 w-3/4 h-5 mb-3'}
-                style={pulse}
-            />
-            <div
-                className={'bg-gray-800 w-full h-5 mb-3'}
-                style={pulse}
-            />
-            <div
-                className={'bg-gray-800 w-5/6 h-5'}
-                style={pulse}
-            />
-        </div>
-    );
-};
 
 const Result = ({name, email, message, isSelfDestructChecked, loading, success, setLoading, setSuccess}) => {
     if (loading) {
