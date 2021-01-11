@@ -3,7 +3,7 @@ import sendEmailService from '../services/send-email-service';
 
 export default async (req, res) => {
     try {
-        const {email, message, isSelfDestructChecked} = req.body;
+        const {name, email, message, isSelfDestructChecked} = req.body;
 
         const {
             guid,
@@ -28,7 +28,7 @@ export default async (req, res) => {
 
         const link = `${basePath}/secret-message/view?id=${guid}&key=${key}&iv=${iv}&hmacKey=${hmacKey}`;
 
-        await sendEmailService(email, link, isSelfDestructChecked);
+        await sendEmailService(name, email, link, isSelfDestructChecked);
 
         res.status(200).end();
     } catch (error) {

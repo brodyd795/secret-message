@@ -7,11 +7,11 @@ import FormButtonContainer from './form-buttons';
 import {FormHeader} from './form-text';
 import ErrorAlert from './error-alert';
 
-const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, setStep, setErrorMessage, errorMessage, email, message, setLoading, setSuccess}) => {
+const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, setStep, setErrorMessage, errorMessage, name, email, message, setLoading, setSuccess}) => {
     const handleNext = async () => {
         setStep(step + 1);
 
-        const result = await sendMessage(email, message, isSelfDestructChecked);
+        const result = await sendMessage(name, email, message, isSelfDestructChecked);
 
         setLoading(false);
         setSuccess(result.status === 200);

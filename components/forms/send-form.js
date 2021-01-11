@@ -4,10 +4,12 @@ import {SendFormSteps} from '../../enums/form-steps';
 
 import ConfirmForm from './confirm-form';
 import EmailForm from './email-form';
+import NameForm from './name-form';
 import MessageForm from './message-form';
 import Result from './result-form';
 
 const SendForm = () => {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [isSelfDestructChecked, setIsSelfDestructChecked] = useState(true);
@@ -18,6 +20,16 @@ const SendForm = () => {
 
     return (
         <>
+            {step === SendFormSteps.NAME &&
+                <NameForm
+                    step={step}
+                    setStep={setStep}
+                    setErrorMessage={setErrorMessage}
+                    errorMessage={errorMessage}
+                    name={name}
+                    setName={setName}
+                />
+            }
             {step === SendFormSteps.EMAIL &&
                 <EmailForm
                     email={email}
@@ -48,6 +60,7 @@ const SendForm = () => {
                     setLoading={setLoading}
                     setSuccess={setSuccess}
                     errorMessage={errorMessage}
+                    name={name}
                 />}
             {step === SendFormSteps.RESULT &&
                 <Result
@@ -60,9 +73,8 @@ const SendForm = () => {
                     setSuccess={setSuccess}
                     loading={loading}
                     success={success}
+                    name={name}
                 />}
-            {/* {errorMessage &&
-                <ErrorAlert errorMessage={errorMessage} />} */}
         </>
     );
 };

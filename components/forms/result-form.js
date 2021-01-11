@@ -33,7 +33,7 @@ const Skeletons = () => {
     );
 };
 
-const Result = ({email, message, isSelfDestructChecked, loading, success, setLoading, setSuccess}) => {
+const Result = ({name, email, message, isSelfDestructChecked, loading, success, setLoading, setSuccess}) => {
     if (loading) {
         return (
             <Skeletons />
@@ -43,7 +43,7 @@ const Result = ({email, message, isSelfDestructChecked, loading, success, setLoa
     const handleTryAgain = async () => {
         setLoading(true);
 
-        const result = await sendMessage(email, message, isSelfDestructChecked);
+        const result = await sendMessage(name, email, message, isSelfDestructChecked);
 
         setSuccess(result.status === 200);
         setLoading(false);
