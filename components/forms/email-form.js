@@ -1,16 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {isMobile} from 'react-device-detect';
 
 import {SendFormSteps} from '../../enums/form-steps';
 import SlidingDiv from '../sliding-div';
 
 import ErrorAlert from './error-alert';
-import FormButtonContainer from './form-buttons';
+import {FormButtonContainer, MobileFormButton} from './form-buttons';
 import {FormHeader, FormSubHeader} from './form-text';
 
 const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessage}) => {
     const [isFocused, setIsFocused] = useState(true);
-    const shouldRenderButtons = !(isMobile && isFocused);
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     const handleNext = () => {
@@ -27,6 +25,8 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessag
         if (step === SendFormSteps.EMAIL) {
             textInput.current.focus();
         }
+
+        window.scrollTo(0, 0);
     }, [step]);
 
     return (
@@ -52,22 +52,31 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessag
                                 setErrorMessage('');
                                 setEmail(e.target.value);
                             }}
-                            className={'my-4 p-1 rounded w-full text-gray-900 w-full mt-10'}
+                            className={'my-4 p-1 rounded w-full text-gray-900 w-full mt-10 -mb-4 sm:mb-0'}
                             ref={textInput}
                             autoComplete={'off'}
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
                         />
                     </div>
+                    <div>
+                        <MobileFormButton
+                            isNext={false}
+                            handleClick={() => setStep(step - 1)}
+                        />
+                        <MobileFormButton
+                            isNext
+                            handleClick={handleNext}
+                        />
+                    </div>
                 </SlidingDiv>
                 {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
-                {shouldRenderButtons &&
-                    <FormButtonContainer
-                        backText={'Name'}
-                        handleBack={() => setStep(step - 1)}
-                        nextText={'Secret Message'}
-                        handleNext={handleNext}
-                    />}
+                <FormButtonContainer
+                    backText={'Name'}
+                    handleBack={() => setStep(step - 1)}
+                    nextText={'Secret Message'}
+                    handleNext={handleNext}
+                />
             </form>
         </>
     );

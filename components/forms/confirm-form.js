@@ -3,7 +3,7 @@ import React, {useEffect} from 'react';
 import SlidingDiv from '../sliding-div';
 import sendMessage from '../../utils/send-message';
 
-import FormButtonContainer from './form-buttons';
+import {FormButtonContainer, MobileFormButton} from './form-buttons';
 import {FormHeader} from './form-text';
 import ErrorAlert from './error-alert';
 
@@ -42,8 +42,8 @@ const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, set
             <form className={'flex flex-col w-full h-60 items-center justify-center'}>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Are you sure?'}</FormHeader>
-                    <div className={'mt-10'}>
-                        <label className="flex flex-col cursor-pointer items-center justify-between">
+                    <div className={'mt-10 flex'}>
+                        <label className="flex flex-col cursor-pointer items-center justify-center">
                             <span className="m-2">{`Self-destruct: ${isSelfDestructChecked ? 'After 15min' : 'Never'}`}</span>
                             <input
                                 className="checkbox cursor-pointer relative w-10 h-5 transition-all duration-200 ease-in-out bg-gray-400 rounded-full shadow-inner outline-none appearance-none"
@@ -52,6 +52,16 @@ const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, set
                                 onClick={() => setIsSelfDestructChecked(!isSelfDestructChecked)}
                             />
                         </label>
+                    </div>
+                    <div>
+                        <MobileFormButton
+                            isNext={false}
+                            handleClick={handleBack}
+                        />
+                        <MobileFormButton
+                            isNext
+                            handleClick={handleNext}
+                        />
                     </div>
                 </SlidingDiv>
                 {errorMessage && <ErrorAlert errorMessage={errorMessage} />}

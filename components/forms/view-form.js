@@ -7,7 +7,7 @@ import {ViewFormSteps} from '../../enums/form-steps';
 import {ErrorMessages} from '../../enums/error-messages';
 
 import {FormHeader} from './form-text';
-import FormButtonContainer from './form-buttons';
+import {FormButtonContainer} from './form-buttons';
 
 const somethingWentWrong = 'Something went wrong...';
 
@@ -15,8 +15,6 @@ const getMessageText = (message) => {
     let header,
         bodyOne,
         bodyTwo;
-    
-    let success = true;
 
     if (!message) {
         header = somethingWentWrong;
