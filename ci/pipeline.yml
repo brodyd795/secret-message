@@ -9,7 +9,7 @@ resources:
   - name: pull-request
     type: pull-request
     check_every: 24h
-    # webhook_token: ((webhook-token)) ????
+    # webhook_token: ((webhook-token))
     source:
       repository: brodyd795/secret-message
       access_token: ((github_access_token))
@@ -52,9 +52,9 @@ jobs:
       - task: deploy
         file: master/ci/tasks/deploy.yml
         params:
-          ENVIRONMENT: dev
-          DEPLOY_WEBHOOK_PASSWORD: ((deploy_webhook_password))
-          PROJECT: secret-message
+          environment: dev
+          deploy_webhook_password: ((deploy_webhook_password))
+          project: secret-message
   - name: deploy-prod
     public: true
     plan:
@@ -63,6 +63,6 @@ jobs:
       - task: deploy
         file: master/ci/tasks/deploy.yml
         params:
-          ENVIRONMENT: prod
-          DEPLOY_WEBHOOK_PASSWORD: ((deploy_webhook_password))
-          PROJECT: secret-message
+          environment: prod
+          deploy_webhook_password: ((deploy_webhook_password))
+          project: secret-message

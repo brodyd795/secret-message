@@ -14,6 +14,6 @@ run:
   args: ['master/ci/scripts/deploy.sh']
 
 params:
-  ENVIRONMENT:
-  DEPLOY_WEBHOOK_PASSWORD:
-  PROJECT:
+  environment:
+  deploy_webhook_password:
+  project:
