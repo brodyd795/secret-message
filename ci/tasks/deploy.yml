@@ -7,11 +7,11 @@ image_resource:
     repository: busybox
 
 inputs:
-  - name: repo
+  - name: master
 
 run:
   path: /bin/sh
-  args: ['repo/ci/scripts/deploy.sh']
+  args: ['master/ci/scripts/deploy.sh']
 
 params:
   ENVIRONMENT:
