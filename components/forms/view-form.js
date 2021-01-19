@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
 import {useRouter} from 'next/router';
+import Link from 'next/link';
 
 import Skeletons from '../skeletons';
 import SlidingDiv from '../sliding-div';
 import {ViewFormSteps} from '../../enums/form-steps';
 import {ErrorMessages} from '../../enums/error-messages';
 
-import {FormHeader} from './form-text';
-import {FormButtonContainer} from './form-buttons';
+import {FormHeader, MessageSubHeader} from './form-text';
+import {FormButtonContainer, MobileFormButton} from './form-buttons';
 
 const somethingWentWrong = 'Something went wrong...';
 
@@ -44,34 +45,34 @@ const MessageView = ({message}) => {
         return (
             <>
                 <FormHeader>{header}</FormHeader>
-                <p className={'mt-4'}>{bodyOne}</p>
-                <p>{bodyTwo}</p>
+                <MessageSubHeader className={'mt-4'}>{bodyOne}</MessageSubHeader>
+                <MessageSubHeader>{bodyTwo}</MessageSubHeader>
             </>
         );
     }
 
     return (
-        <>
+        <div className={'-mt-24'}>
             <FormHeader>{'Message:'}</FormHeader>
             <textarea
                 id={'message'}
                 readOnly
                 value={message}
                 aria-label={'message'}
-                className={'p-1 rounded w-4/5 text-gray-900 m-10 bg-gray-100'}
+                className={'p-1 rounded w-4/5 text-gray-900 mx-10 my-5 bg-gray-100'}
                 rows={5}
             />
-            <p className={'mt-4 text-red-400'}>{'This message has been permanently deleted from the server...'}</p>
-            <p className={'text-red-400'}>{'This is the only time you can view it.'}</p>
-        </>
+            <MessageSubHeader isWarning>{'This message has been permanently deleted from the server.'}</MessageSubHeader>
+            <MessageSubHeader isWarning>{'This is the only time you can view it.'}</MessageSubHeader>
+        </div>
     );
 };
 
 const ConfirmView = () =>
     <div>
         <FormHeader>{'Are you sure?'}</FormHeader>
-        <p className={'mt-10'}>{'You can only view this message once.'}</p>
-        <p className={''}>{'Once you view it, it will be permanently deleted from the server.'}</p>
+        <MessageSubHeader>{'You can only view this message once.'}</MessageSubHeader>
+        <MessageSubHeader>{'Once you view it, it will be permanently deleted from the server.'}</MessageSubHeader>
     </div>;
 
 const ViewForm = () => {
@@ -107,19 +108,41 @@ const ViewForm = () => {
                     <MessageView message={message} />}
             </SlidingDiv>
             {message ?
-                <FormButtonContainer
-                    backText={''}
-                    handleBack={() => {}}
-                    nextText={'Home'}
-                    handleNext={() => router.push('/')}
-                />
+                <>
+                    <Link href="/">
+                        <button
+                            type={'submit'}
+                            className={'flex flex-col justify-center outline-none focus:outline-none items-center mx-4 mt-8 p-2 rounded border w-1/2 sm:hidden transform hover:scale-105 transition duration-150 ease-in-out bg-gray-900'}
+                        >
+                            {'Home'}
+                        </button>
+                    </Link>
+                    <FormButtonContainer
+                        backText={''}
+                        handleBack={() => {}}
+                        nextText={'Home'}
+                        handleNext={() => router.push('/')}
+                    />
+                </>
                 :
-                <FormButtonContainer
-                    backText={'View later'}
-                    handleBack={() => router.push('/')}
-                    nextText={'Confirm'}
-                    handleNext={handleConfirm}
-                />}
+                <>
+                    <div>
+                        <MobileFormButton
+                            isNext={false}
+                            handleClick={() => router.push('/')}
+                        />
+                        <MobileFormButton
+                            isNext
+                            handleClick={handleConfirm}
+                        />
+                    </div>
+                    <FormButtonContainer
+                        backText={'View later'}
+                        handleBack={() => router.push('/')}
+                        nextText={'Confirm'}
+                        handleNext={handleConfirm}
+                    />
+                </>}
         </div>
     );
 };
