@@ -30,6 +30,7 @@ jobs:
         params:
           path: pull-request
           status: pending
+          target_url: https://concourse.dingel.dev/builds/$BUILD_ID
       - task: build
         file: pull-request/ci/tasks/build.yml
         on_failure:
@@ -37,10 +38,12 @@ jobs:
           params:
             path: pull-request
             status: failure
+            target_url: https://concourse.dingel.dev/builds/$BUILD_ID
       - put: pull-request
         params:
           path: pull-request
           status: success
+          target_url: https://concourse.dingel.dev/builds/$BUILD_ID
   - name: deploy-dev
     public: true
     plan:
