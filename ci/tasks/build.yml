@@ -7,8 +7,8 @@ image_resource:
     tag: '8'
 
 inputs:
-  - name: repo
+  - name: pull-request
 
 run:
   path: /bin/sh
-  args: ['repo/ci/scripts/build.sh']
+  args: ['pull-request/ci/scripts/build.sh']

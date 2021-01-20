@@ -1,16 +1,68 @@
 ---
+resource_types:
+  - name: pull-request
+    type: docker-image
+    source:
+      repository: teliaoss/github-pr-resource
+
 resources:
-  - name: repo
+  - name: pull-request
+    type: pull-request
+    check_every: 24h
+    # webhook_token: ((webhook-token))
+    source:
+      repository: brodyd795/secret-message
+      access_token: ((github_access_token))
+  - name: master
     type: git
     source:
       uri: https://github.com/brodyd795/secret-message.git
       branch: master
 
 jobs:
-  - name: deploy
+  - name: pr-verify
     public: true
     plan:
-      - get: repo
+      - get: pull-request
         trigger: true
+        version: every
+      - put: pull-request
+        params:
+          path: pull-request
+          status: pending
+          target_url: https://concourse.dingel.dev/builds/$BUILD_ID
       - task: build
-        file: repo/ci/tasks/build.yml
+        file: pull-request/ci/tasks/build.yml
+        on_failure:
+          put: pull-request
+          params:
+            path: pull-request
+            status: failure
+            target_url: https://concourse.dingel.dev/builds/$BUILD_ID
+      - put: pull-request
+        params:
+          path: pull-request
+          status: success
+          target_url: https://concourse.dingel.dev/builds/$BUILD_ID
+  - name: deploy-dev
+    public: true
+    plan:
+      - get: master
+        trigger: true
+      - task: deploy
+        file: master/ci/tasks/deploy.yml
+        params:
+          environment: dev
+          deploy_webhook_password: ((deploy_webhook_password))
+          project: secret-message
+  - name: deploy-prod
+    public: true
+    plan:
+      - get: master
+        trigger: true
+      - task: deploy
+        file: master/ci/tasks/deploy.yml
+        params:
+          environment: prod
+          deploy_webhook_password: ((deploy_webhook_password))
+          project: secret-message

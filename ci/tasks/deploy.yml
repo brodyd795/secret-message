@@ -2,17 +2,19 @@
 platform: linux
 
 image_resource:
-  type: docker-image
+  type: registry-image
   source:
-    repository: busybox
+    repository: node
+    tag: '8'
 
 inputs:
   - name: master
 
 run:
-  path: master/ci/scripts/deploy.sh
+  path: /bin/sh
+  args: ['master/ci/scripts/deploy.sh']
 
 params:
-  ENVIRONMENT:
-  DEPLOY_WEBHOOK_PASSWORD:
-  PROJECT:
+  environment:
+  deploy_webhook_password:
+  project:
