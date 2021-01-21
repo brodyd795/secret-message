@@ -2,7 +2,7 @@
 
 echo "Node Version: $(node --version)"
 curl \
-    --data "env=${ENVIRONMENT}" \
-    --data "password=${DEPLOY_WEBHOOK_PASSWORD}" \
-    --data "project=${PROJECT}" \
+    --data "env=${environment}" \
+    --data "password=${deploy_webhook_password}" \
+    --data "project=${project}" \
     https://dingel.dev/deploy
