@@ -9,7 +9,7 @@ resources:
   - name: pull-request
     type: pull-request
     check_every: 24h
-    # webhook_token: ((webhook-token))
+    webhook_token: ((webhook_token))
     source:
       repository: brodyd795/secret-message
       access_token: ((github_access_token))
