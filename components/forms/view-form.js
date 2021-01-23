@@ -100,7 +100,7 @@ const ViewForm = () => {
     }
 
     return (
-        <div className={'flex flex-col w-full h-60 items-center'}>
+        <div className={'flex flex-col w-full min-h-60 items-center'}>
             <SlidingDiv motionKey={step}>
                 {step === 0 &&
                     <ConfirmView />}

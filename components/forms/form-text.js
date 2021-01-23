@@ -16,7 +16,7 @@ export const FormSubHeader = ({children}) =>
 
 export const MessageSubHeader = ({children, isWarning}) =>
     <span
-        className={`block text-md my-2 mx-4 ${isWarning ? 'text-red-400' : null}`}
+        className={`text-center block text-md my-2 mx-4 ${isWarning ? 'text-red-400' : null}`}
     >
         {children}
     </span>;

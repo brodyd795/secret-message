@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import styled from 'styled-components';
 
 import {SendFormSteps} from '../../enums/form-steps';
 import SlidingDiv from '../sliding-div';
@@ -6,6 +7,10 @@ import SlidingDiv from '../sliding-div';
 import ErrorAlert from './error-alert';
 import {FormButtonContainer, MobileFormButton} from './form-buttons';
 import {FormHeader, FormSubHeader} from './form-text';
+
+const StyledInput = styled.input`
+    height: 44px;
+`;
 
 const NameForm = ({name, setName, step, setStep, setErrorMessage, errorMessage}) => {
     const [isFocused, setIsFocused] = useState(true);
@@ -36,14 +41,14 @@ const NameForm = ({name, setName, step, setStep, setErrorMessage, errorMessage})
                     e.preventDefault();
                     handleNext();
                 }}
-                className={'flex flex-col w-full h-60 items-center'}
+                className={'flex flex-col w-full min-h-60 items-center'}
             >
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Enter first and last name'}</FormHeader>
                     <FormSubHeader>{'This information is never stored.'}</FormSubHeader>
                     <FormSubHeader>{'We only use it in the email to your recipient.'}</FormSubHeader>
-                    <div className={'flex justify-center w-3/4 sm:w-2/5 md:w-1/3 lg:w-1/4'}>
-                        <input
+                    <div className={'flex justify-center items-center w-3/4 sm:w-2/5 md:w-1/3 lg:w-1/4 mt-8'}>
+                        <StyledInput
                             id={'name'}
                             type={'text'}
                             value={name}

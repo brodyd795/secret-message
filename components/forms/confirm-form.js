@@ -39,7 +39,7 @@ const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, set
 
     return (
         <>
-            <form className={'flex flex-col w-full h-60 items-center justify-center'}>
+            <form className={'flex flex-col w-full min-h-60 items-center justify-center'}>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Are you sure?'}</FormHeader>
                     <div className={'mt-10 flex'}>

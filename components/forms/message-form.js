@@ -37,7 +37,7 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
 
     return (
         <>
-            <form className={'flex flex-col w-full h-60 items-center'}>
+            <form className={'flex flex-col w-full min-h-60 items-center'}>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Enter secret message'}</FormHeader>
                     <div className={'flex justify-center items-center w-3/4 md:w-2/3 lg:w-1/2 -mb-10 sm:mb-0'}>
