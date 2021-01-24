@@ -83,6 +83,16 @@ const ViewForm = () => {
 
     const {id, key, iv, hmacKey} = router.query;
 
+    if (id === undefined || key === undefined || iv === undefined || hmacKey === undefined) {
+        return (
+            <div>
+                <FormHeader>{somethingWentWrong}</FormHeader>
+                <MessageSubHeader>{'Sorry, the url you\'ve entered has some missing data.'}</MessageSubHeader>
+                <MessageSubHeader>{'Please try again.'}</MessageSubHeader>
+            </div>
+        );
+    }
+
     const handleConfirm = async () => {
         setLoading(true);
         setStep(ViewFormSteps.VIEW);
