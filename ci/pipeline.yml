@@ -8,7 +8,7 @@ resource_types:
 resources:
   - name: pull-request
     type: pull-request
-    check_every: 24h
+    check_every: 1m
     webhook_token: ((webhook_token))
     source:
       repository: brodyd795/secret-message
