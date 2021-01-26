@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {SendFormSteps} from '../../enums/form-steps';
 
@@ -18,6 +18,10 @@ const SendForm = () => {
     const [success, setSuccess] = useState(false);
     const [loading, setLoading] = useState(true);
 
+    useEffect(() => {
+        setErrorMessage('');
+    }, [step]);
+
     return (
         <>
             {step === SendFormSteps.NAME &&
@@ -28,8 +32,7 @@ const SendForm = () => {
                     errorMessage={errorMessage}
                     name={name}
                     setName={setName}
-                />
-            }
+                />}
             {step === SendFormSteps.EMAIL &&
                 <EmailForm
                     email={email}
