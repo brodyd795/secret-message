@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-import encryptionEnums from '../../../enums/encryption';
+import {encryptionEnums} from '../../../enums/encryption';
 
 export const encrypt = (message) => {
 	const key = crypto.randomBytes(32).toString('hex');
