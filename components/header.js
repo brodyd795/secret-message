@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Link from 'next/link';
 import {motion, AnimatePresence} from 'framer-motion';
 
-import {theme} from '../tailwind.config';
 import BarsIcon from '../public/bars.svg';
 import TimesIcon from '../public/times.svg';
 
@@ -37,7 +36,6 @@ const Header = () => {
                     type={'button'}
                     onClick={() => setIsOpen(!isOpen)}
                     className={'block hover:text-white focus:text-white focus:outline-none active:bg-transparent p-3 md:hidden'}
-                    style={{color: theme.extend.colors.gold.DEFAULT}}
                 >
                     {isOpen ? <TimesIcon className={'h-6'} /> : <BarsIcon className={'h-6'} />}
                 </button>

@@ -1,9 +1,7 @@
 import React from 'react';
 
-import {theme} from '../tailwind.config';
-
 const pulse = {
-    animation: theme.extend.animation.pulseskeleton
+    animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite'
 };
 
 const Skeletons = () =>

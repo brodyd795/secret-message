@@ -2,7 +2,6 @@ import Head from 'next/head';
 import React from 'react';
 
 import '../styles/index.css';
-import {theme} from '../tailwind.config';
 
 export default ({Component, pageProps}) =>
     <>
@@ -29,7 +28,7 @@ export default ({Component, pageProps}) =>
                 }
                 
                 body {
-                    color: ${theme.extend.colors.gold.DEFAULT};
+                    color: #c6c6c6;
                     font-size: 16px;
                     background-color: #03060c;
                     font-family: 'JetBrains Mono', monospace;
@@ -42,7 +41,7 @@ export default ({Component, pageProps}) =>
                 }
                 
                 a {
-                    color: ${theme.extend.colors.gold.DEFAULT};
+                    color: #c6c6c6;
                     cursor: pointer;
                 }
                 
