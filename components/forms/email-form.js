@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from 'react';
-import styled from 'styled-components';
 
 import {SendFormSteps} from '../../enums/form-steps';
 import SlidingDiv from '../sliding-div';
@@ -7,10 +6,6 @@ import SlidingDiv from '../sliding-div';
 import ErrorAlert from './error-alert';
 import {FormButtonContainer, MobileFormButton} from './form-buttons';
 import {FormHeader, FormSubHeader} from './form-text';
-
-const StyledInput = styled.input`
-    height: 44px;
-`;
 
 const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessage}) => {
     const [isFocused, setIsFocused] = useState(true);
@@ -47,7 +42,7 @@ const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessag
                     <FormHeader>{'Enter recipient email address'}</FormHeader>
                     <FormSubHeader>{'(This is also never stored.)'}</FormSubHeader>
                     <div className={'flex justify-center items-center w-3/4 sm:w-2/5 md:w-1/3 lg:w-1/4'}>
-                        <StyledInput
+                        <input
                             id={'email'}
                             type={'email'}
                             value={email}
