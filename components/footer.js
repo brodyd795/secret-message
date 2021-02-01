@@ -2,10 +2,9 @@ import React from 'react';
 
 import Copyright from './copyright';
 
-const Footer = () => (
+const Footer = () =>
     <div className={'text-center mt-10'}>
         <Copyright />
-    </div>
-);
+    </div>;
 
 export default Footer;
