@@ -1,49 +1,48 @@
 import mysql from 'serverless-mysql';
 
 let connection,
-	isMidTransaction = false;
+    isMidTransaction = false;
 
 export const conn = () => {
-	if (connection !== undefined) {
-		return connection;
-	}
+    if (connection !== undefined) {
+        return connection;
+    }
 
-	const config = {
-		host: process.env.DB_HOST,
-		database: process.env.DB_NAME,
-		user: process.env.DB_USER,
-		password: process.env.DB_PASSWORD
-	};
-	
-	connection = mysql({
-		config
-	});
+    const config = {
+        host: process.env.DB_HOST,
+        database: process.env.DB_NAME,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD
+    };
 
-	return connection;
+    connection = mysql({
+        config
+    });
+
+    return connection;
 };
 
 export const withTransactionWrapper = async (queries, args) => {
-	if (!isMidTransaction) {
-		isMidTransaction = true;
+    if (!isMidTransaction) {
+        isMidTransaction = true;
 
-		try {
-			await conn().query('BEGIN');
+        try {
+            await conn().query('BEGIN');
 
-			const results = await queries(args);
+            const results = await queries(args);
 
-			await conn().query('COMMIT');
+            await conn().query('COMMIT');
 
-			return results;
-		} catch (error) {
-			await conn().query('ROLLBACK');
-			console.log('error', error)
+            return results;
+        } catch (error) {
+            await conn().query('ROLLBACK');
 
-			return new Error(error);
-		} finally {
-			await conn().end();
-			isMidTransaction = false;
-		}
-	}
+            return new Error(error);
+        } finally {
+            await conn().end();
+            isMidTransaction = false;
+        }
+    }
 
-	return queries(args);
+    return queries(args);
 };

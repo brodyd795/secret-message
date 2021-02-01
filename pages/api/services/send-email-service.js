@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 
-export default async (name, recipientEmailAddress, link, isSelfDestructChecked) => {
+const emailService = async (name, recipientEmailAddress, link, isSelfDestructChecked) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -24,6 +24,8 @@ export default async (name, recipientEmailAddress, link, isSelfDestructChecked) 
             return error;
         }
 
-        return;
+        return null;
     });
 };
+
+export default emailService;
