@@ -2,19 +2,18 @@ import Head from 'next/head';
 import React from 'react';
 
 import '../styles/index.css';
-import {theme} from '../tailwind.config';
 
 export default ({Component, pageProps}) =>
     <>
         <Head>
-            <meta charSet="utf-8" />
+            <meta charSet={'utf-8'} />
             <meta
-                httpEquiv="X-UA-Compatible"
-                content="IE=edge"
+                httpEquiv={'X-UA-Compatible'}
+                content={'IE=edge'}
             />
             <meta
-                name="viewport"
-                content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+                name={'viewport'}
+                content={'width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no'}
             />
             <title>Secret Message App</title>
         </Head>
@@ -29,7 +28,7 @@ export default ({Component, pageProps}) =>
                 }
                 
                 body {
-                    color: ${theme.extend.colors.gold.DEFAULT};
+                    color: #adafbb;
                     font-size: 16px;
                     background-color: #03060c;
                     font-family: 'JetBrains Mono', monospace;
@@ -42,7 +41,7 @@ export default ({Component, pageProps}) =>
                 }
                 
                 a {
-                    color: ${theme.extend.colors.gold.DEFAULT};
+                    color: #c6c6c6;
                     cursor: pointer;
                 }
                 

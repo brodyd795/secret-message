@@ -1,13 +1,13 @@
 import crypto from 'crypto';
 
-import encryptionEnums from '../../../enums/encryption';
+import {encryptionEnums} from '../../../enums/encryption';
 
 export const encrypt = (message) => {
-	const key = crypto.randomBytes(32).toString('hex');
-	const iv = crypto.randomBytes(16).toString('hex');
-	
-	const hmacKey = crypto.randomBytes(16).toString('hex');
-	const hmac = crypto.createHmac(encryptionEnums.HMAC_ALGORITHM, hmacKey);
+    const key = crypto.randomBytes(32).toString('hex');
+    const iv = crypto.randomBytes(16).toString('hex');
+
+    const hmacKey = crypto.randomBytes(16).toString('hex');
+    const hmac = crypto.createHmac(encryptionEnums.HMAC_ALGORITHM, hmacKey);
 
     hmac.write(message);
     hmac.end();
@@ -16,24 +16,24 @@ export const encrypt = (message) => {
     const cipher = crypto.createCipheriv(encryptionEnums.CIPHER_ALGORITHM, Buffer.from(key, 'hex'), Buffer.from(iv, 'hex'));
     const encryptedMessage = Buffer.concat([cipher.update(message), cipher.final()]);
     const encryptedMessageString = encryptedMessage.toString('hex');
-	
-	return {
-		key,
-		iv,
-		hmacKey,
-		hmacHash,
-		encryptedMessage: encryptedMessageString
-	}
+
+    return {
+        key,
+        iv,
+        hmacKey,
+        hmacHash,
+        encryptedMessage: encryptedMessageString
+    };
 };
 
 export const decrypt = (data) => {
     const {
         encryptedMessage,
-		originalHmacKey,
-		originalHmacHash,
-		key,
-		iv,
-		clientHmacKey,
+        originalHmacKey,
+        originalHmacHash,
+        key,
+        iv,
+        clientHmacKey
     } = data;
 
     const encryptedText = Buffer.from(encryptedMessage, 'hex');

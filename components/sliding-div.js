@@ -26,9 +26,9 @@ const SlidingDiv = ({children, motionKey}) => (
         <AnimatePresence exitBeforeEnter>
             <motion.div
                 key={motionKey}
-                initial="hidden"
-                animate="visible"
-                exit="exiting"
+                initial={'hidden'}
+                animate={'visible'}
+                exit={'exiting'}
                 layout
                 variants={variants}
                 className={'flex flex-col items-center justify-center w-full'}

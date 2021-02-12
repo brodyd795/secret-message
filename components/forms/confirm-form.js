@@ -2,12 +2,14 @@ import React, {useEffect} from 'react';
 
 import SlidingDiv from '../sliding-div';
 import sendMessage from '../../utils/send-message';
+import {useSend} from '../../utils/send-context';
 
 import {FormButtonContainer, MobileFormButton} from './form-buttons';
 import {FormHeader} from './form-text';
 import ErrorAlert from './error-alert';
 
-const ConfirmForm = ({isSelfDestructChecked, setIsSelfDestructChecked, step, setStep, setErrorMessage, errorMessage, name, email, message, setLoading, setSuccess}) => {
+const ConfirmForm = () => {
+    const {isSelfDestructChecked, setIsSelfDestructChecked, step, setStep, setErrorMessage, errorMessage, name, email, message, setLoading, setSuccess} = useSend();
     const handleNext = async () => {
         setStep(step + 1);
 

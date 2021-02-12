@@ -6,6 +6,6 @@ module.exports = {
       '@babel/preset-react',
       "next/babel"
     ],
-    plugins: ['@babel/plugin-transform-runtime', ["styled-components", { "ssr": true }]],
+    plugins: ['@babel/plugin-transform-runtime'],
   };
   

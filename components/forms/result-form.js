@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import sendMessage from '../../utils/send-message';
 import Skeletons from '../skeletons';
+import {useSend} from '../../utils/send-context';
 
 const Heading = ({children}) =>
     <h3 className={'text-center text-xl'}>{children}</h3>;
@@ -10,7 +11,9 @@ const Heading = ({children}) =>
 const Text = ({children}) =>
     <p className={'mt-4 text-center'}>{children}</p>;
 
-const Result = ({name, email, message, isSelfDestructChecked, loading, success, setLoading, setSuccess}) => {
+const Result = () => {
+    const {name, email, message, isSelfDestructChecked, loading, success, setLoading, setSuccess} = useSend();
+
     if (loading) {
         return (
             <Skeletons />
