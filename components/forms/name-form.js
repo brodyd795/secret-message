@@ -1,13 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 import {SendFormSteps} from '../../enums/form-steps';
+import {useSend} from '../../utils/send-context';
 import SlidingDiv from '../sliding-div';
 
 import ErrorAlert from './error-alert';
 import {FormButtonContainer, MobileFormButton} from './form-buttons';
 import {FormHeader, FormSubHeader} from './form-text';
 
-const NameForm = ({name, setName, step, setStep, setErrorMessage, errorMessage}) => {
+const NameForm = () => {
+    const {name, setName, step, setStep, setErrorMessage, errorMessage} = useSend();
     const [isFocused, setIsFocused] = useState(true);
 
     const handleNext = () => {

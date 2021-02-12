@@ -1,13 +1,15 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 import {SendFormSteps} from '../../enums/form-steps';
+import {useSend} from '../../utils/send-context';
 import SlidingDiv from '../sliding-div';
 
 import ErrorAlert from './error-alert';
 import {FormButtonContainer, MobileFormButton} from './form-buttons';
 import {FormHeader, FormSubHeader} from './form-text';
 
-const EmailForm = ({email, setEmail, step, setStep, setErrorMessage, errorMessage}) => {
+const EmailForm = () => {
+    const {email, setEmail, step, setStep, setErrorMessage, errorMessage} = useSend();
     const [isFocused, setIsFocused] = useState(true);
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
