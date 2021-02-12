@@ -8,23 +8,23 @@ import ErrorAlert from './error-alert';
 import {FormButtonContainer, MobileFormButton} from './form-buttons';
 import {FormHeader, FormSubHeader} from './form-text';
 
-const EmailForm = () => {
-    const {email, setEmail, step, setStep, setErrorMessage, errorMessage} = useSend();
+const NameForm = () => {
+    const {name, setName, step, setStep, setErrorMessage, errorMessage} = useSend();
     const [isFocused, setIsFocused] = useState(true);
-    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
     const handleNext = () => {
-        if (emailRegex.test(email)) {
+        if (name.length) {
             setStep(step + 1);
         } else {
-            setErrorMessage('Please enter a valid email address.');
+            window.scrollTo(0, document.body.scrollHeight);
+            setErrorMessage('Please enter your name.');
         }
     };
 
     const textInput = useRef(null);
 
     useEffect(() => {
-        if (step === SendFormSteps.EMAIL) {
+        if (step === SendFormSteps.NAME) {
             textInput.current.focus();
         }
 
@@ -41,30 +41,25 @@ const EmailForm = () => {
                 className={'flex flex-col w-full min-h-60 items-center'}
             >
                 <SlidingDiv motionKey={step}>
-                    <FormHeader>{'Enter recipient email address'}</FormHeader>
-                    <FormSubHeader>{'(This is also never stored.)'}</FormSubHeader>
-                    <div className={'flex justify-center items-center w-3/4 sm:w-2/5 md:w-1/3 lg:w-1/4'}>
+                    <FormHeader>{'Enter first and last name'}</FormHeader>
+                    <FormSubHeader>{'This information is never stored.'}</FormSubHeader>
+                    <FormSubHeader>{'We only use it in the email to your recipient.'}</FormSubHeader>
+                    <div className={'flex justify-center items-center w-3/4 sm:w-2/5 md:w-1/3 lg:w-1/4 mt-8'}>
                         <input
-                            id={'email'}
-                            type={'email'}
-                            value={email}
-                            aria-label={'email'}
-                            placeholder={'me@example.com'}
+                            id={'name'}
+                            type={'text'}
+                            value={name}
+                            aria-label={'name'}
+                            placeholder={'Brody Dingel'}
                             onChange={(e) => {
                                 setErrorMessage('');
-                                setEmail(e.target.value);
+                                setName(e.target.value);
                             }}
-                            className={'my-4 p-1 rounded w-full text-gray-900 w-full mt-10 -mb-4 sm:mb-0'}
+                            className={'my-4 p-1 rounded w-full text-gray-900 w-full mt-10'}
                             ref={textInput}
                             autoComplete={'off'}
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
-                        />
-                    </div>
-                    <div>
-                        <MobileFormButton
-                            isNext={false}
-                            handleClick={() => setStep(step - 1)}
                         />
                         <MobileFormButton
                             isNext
@@ -74,9 +69,9 @@ const EmailForm = () => {
                 </SlidingDiv>
                 {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
                 <FormButtonContainer
-                    backText={'Name'}
+                    backText={''}
                     handleBack={() => setStep(step - 1)}
-                    nextText={'Secret Message'}
+                    nextText={'Email'}
                     handleNext={handleNext}
                 />
             </form>
@@ -84,4 +79,4 @@ const EmailForm = () => {
     );
 };
 
-export default EmailForm;
+export default NameForm;

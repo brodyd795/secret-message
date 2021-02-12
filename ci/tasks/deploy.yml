@@ -1,0 +1,20 @@
+---
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: node
+    tag: '8'
+
+inputs:
+  - name: master
+
+run:
+  path: /bin/sh
+  args: ['master/ci/scripts/deploy.sh']
+
+params:
+  environment:
+  deploy_webhook_password:
+  project:

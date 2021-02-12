@@ -1,17 +1,16 @@
 import React, {useEffect, useRef, useState} from 'react';
 
 import {SendFormSteps} from '../../enums/form-steps';
+import {useSend} from '../../utils/send-context';
 import SlidingDiv from '../sliding-div';
-import useWindowDimensions from '../../utils/useWindowDimensions';
 
 import ErrorAlert from './error-alert';
-import FormButtonContainer from './form-buttons';
+import {FormButtonContainer, MobileFormButton} from './form-buttons';
 import {FormHeader} from './form-text';
 
-const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, errorMessage}) => {
+const MessageForm = () => {
+    const {message, setMessage, step, setStep, setErrorMessage, errorMessage} = useSend();
     const [isFocused, setIsFocused] = useState(false);
-    const {width} = useWindowDimensions();
-    const shouldRenderButtons = !(width < 768 && isFocused);
 
     const handleNext = () => {
         if (message.length) {
@@ -34,15 +33,16 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
             textInput.current.focus();
             setIsFocused(true);
         }
+
+        window.scrollTo(0, 0);
     }, [step]);
-    console.log(width);
 
     return (
         <>
-            <form className={'flex flex-col w-full h-60 items-center'}>
+            <form className={'flex flex-col w-full min-h-60 items-center'}>
                 <SlidingDiv motionKey={step}>
                     <FormHeader>{'Enter secret message'}</FormHeader>
-                    <div className={'flex justify-center w-3/4 md:w-2/3 lg:w-1/2'}>
+                    <div className={'flex justify-center items-center w-3/4 md:w-2/3 lg:w-1/2 -mb-10 sm:mb-0'}>
                         <textarea
                             id={'message'}
                             value={message}
@@ -59,15 +59,24 @@ const MessageForm = ({message, setMessage, step, setStep, setErrorMessage, error
                             onBlur={() => setIsFocused(false)}
                         />
                     </div>
+                    <div>
+                        <MobileFormButton
+                            isNext={false}
+                            handleClick={handleBack}
+                        />
+                        <MobileFormButton
+                            isNext
+                            handleClick={handleNext}
+                        />
+                    </div>
                 </SlidingDiv>
                 {errorMessage && <ErrorAlert errorMessage={errorMessage} />}
-                {shouldRenderButtons &&
-                    <FormButtonContainer
-                        backText={'Email'}
-                        handleBack={handleBack}
-                        nextText={'Confirm'}
-                        handleNext={handleNext}
-                    />}
+                <FormButtonContainer
+                    backText={'Email'}
+                    handleBack={handleBack}
+                    nextText={'Confirm'}
+                    handleNext={handleNext}
+                />
             </form>
         </>
     );

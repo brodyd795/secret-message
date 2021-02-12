@@ -1,15 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-
-const StyledCopyright = styled.p`
-    display: inline-block;
-`;
 
 const Copyright = () => {
-    const toDate = new Date().getFullYear();
-    const fullDate = toDate > 2020 ? `2020 - ${toDate}` : '2020';
+    const date = `2020 - ${new Date().getFullYear()}`;
 
-    return <StyledCopyright>{`© Copyright ${fullDate} Brody Dingel`}</StyledCopyright>;
+    return (
+        <p className={'inline-block'}>
+            {`© Copyright ${date} Brody Dingel`}
+        </p>
+    );
 };
 
 export default Copyright;

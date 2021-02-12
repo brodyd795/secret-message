@@ -1,0 +1,14 @@
+platform: linux
+
+image_resource:
+  type: registry-image
+  source:
+    repository: node
+    tag: '8'
+
+inputs:
+  - name: pull-request
+
+run:
+  path: /bin/sh
+  args: ['pull-request/ci/scripts/build.sh']

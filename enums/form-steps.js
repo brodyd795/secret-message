@@ -1,8 +1,9 @@
 export const SendFormSteps = {
-    EMAIL: 0,
-    MESSAGE: 1,
-    CONFIRM: 2,
-    RESULT: 3
+    NAME: 0,
+    EMAIL: 1,
+    MESSAGE: 2,
+    CONFIRM: 3,
+    RESULT: 4
 };
 
 export const ViewFormSteps = {

@@ -4,67 +4,79 @@ import Page from '../components/page';
 import Footer from '../components/footer';
 import Header from '../components/header';
 
-const styles = {
-    wrapper: {
-        flex: 1
-    }
-};
+const Heading = ({children}) =>
+    <div className={'text-3xl mt-10 mb-4'}>{children}</div>;
 
-const Card = ({children}) => <div className={'flex flex-col m-3 p-3 items-center border-2 border-white'}>{children}</div>;
+const Text = ({children}) =>
+    <div className={'mt-2 ml-4 border-l pl-4'}>{children}</div>;
 
-const H3 = ({children}) => <h3 className={'text-gray-500'}>{children}</h3>;
+const Disclaimer = () =>
+    <>
+        <hr className={'mt-10'} />
+        <div className={'text-xl mt-10'}>
+            {'Disclaimer and Liability Notice'}
+        </div>
+        <div className={'text-sm mt-2 ml-4 border-l pl-4'}>
+            {'The owner of this website makes no promises or guarantees about the security or adequacy of the tool provided herein and expressly disclaims liability for any errors in the contents of this website, including but not limited to the security of the data collected and communicated.'}
+        </div>
+    </>;
 
-const P = ({children}) => <p className={'m-3'}>{children}</p>;
+const Content = () =>
+    <>
+        <Heading>
+            {'Encrypted at rest'}
+        </Heading>
+        <Text>
+            <span>{'Your secret message is encrypted using '}</span>
+            <a
+                href={'https://en.wikipedia.org/wiki/Advanced_Encryption_Standard'}
+                className={'underline'}
+            >
+                {'AES-256-CBC'}
+            </a>
+            <span>{' (the only publicly accessible cipher approved by the NSA) before it’s ever stored.'}</span>
+        </Text>
+        <Text
+            content={'The raw message never touches the database, and it’s additionally protected by an HMAC to verify that it was never tampered with.'}
+        />
+        <Heading>
+            {'Decryptable only by the recipient'}
+        </Heading>
+        <Text>
+            {'Once the encryption keys are generated, they are sent to the recipient and immediately discarded. Nobody can decrypt your message except the recipient.'}
+        </Text>
+        <Heading>
+            {'Open-source code'}
+        </Heading>
+        <Text>
+            <span>{'All of the code for this website is publicly accessible '}</span>
+            <a
+                href={'https://github.com/brodyd795/secret-message'}
+                className={'underline'}
+            >
+                {' on GitHub'}
+            </a>
+            <span>{' and has been reviewed by experienced developers.'}</span>
+        </Text>
+        <Heading>
+            {'Secure transit'}
+        </Heading>
+        <Text>
+            {'Your message is communicated over a secure network encrypted by HTTPS protocol. In addition, the database is accessible only by the server hosting the website, thereby preventing access over the internet.'}
+        </Text>
+    </>;
 
-const UI = () => (
-    <Page title={'About'}>
+const About = () =>
+    <Page title={'About | Secret Message'}>
         <Header />
-        <div style={styles.wrapper} className={'md:flex flex-1 items-center'}>
-            <div className={'md:flex'}>
-                <Card>
-                    <H3>{'Secure transit'}</H3>
-                    <P>{'Your secrets are sent via https protocol at every step along the way.'}</P>
-                </Card>
-                <Card>
-                    <H3>{'Encrypted at rest'}</H3>
-                    <P>
-                        {'All data is stored on a private server, fully encrypted using '}
-                        <a
-                            href={'https://en.wikipedia.org/wiki/Advanced_Encryption_Standard'}
-                            target={'_blank'}
-                        >
-                            {'aes-256-cbc'}
-                        </a>
-                        {', the only public cipher approved by the NSA.'}
-                    </P>
-                </Card>
-                <Card>
-                    <H3>{'Readable by recipient alone'}</H3>
-                    <P>{'Only one copy of the encyption keys exist – in the hands of your recipient. Not even the creators can decrypt your message.'}</P>
-                </Card>
-                <Card>
-                    <H3>{'Open source'}</H3>
-                    <P>
-                        {'The full code for this app is publicly available '}
-                        <a
-                            href={'https://github.com/brodyd795/secret-message'}
-                            target={'_blank'}
-                        >
-                            {'here'}
-                        </a>
-                        {'. No blind trust – fully open.'}
-                    </P>
-                </Card>
-            </div>
-
-            <div className={'sticky bottom-0 w-full h-64'}>
-                <button className={'border p-3 mt-4 w-full mb-2'}>
-                    {'Send Message'}
-                </button>
+        <div className={'flex mt-32 flex-col items-center'}>
+            <div className={'flex flex-col md:w-2/3 mx-4 mb-10'}>
+                <h1 className={'text-center text-4xl'}>{'About'}</h1>
+                <Content />
+                <Disclaimer />
             </div>
         </div>
         <Footer />
-    </Page>
-);
+    </Page>;
 
-export default UI;
+export default About;

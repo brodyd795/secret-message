@@ -5,12 +5,10 @@ import Header from '../components/header';
 import ViewForm from '../components/forms/view-form';
 
 const View = () =>
-    <Page title={'Send | Secret Message'}>
+    <Page title={'View | Secret Message'}>
         <Header />
-        <div className={'h-screen flex flex-col justify-center items-center'}>
-            <div className={'relative flex flex-col justify-center w-3/4 sm:w-1/2 md:w-2/5'}>
-                <ViewForm />
-            </div>
+        <div className={'flex flex-1 flex-col justify-center items-center'}>
+            <ViewForm />
         </div>
     </Page>;
 
