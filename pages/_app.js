@@ -28,7 +28,7 @@ export default ({Component, pageProps}) =>
                 }
                 
                 body {
-                    color: #c6c6c6;
+                    color: #adafbb;
                     font-size: 16px;
                     background-color: #03060c;
                     font-family: 'JetBrains Mono', monospace;
