@@ -1,7 +1,12 @@
 import ReactGA from 'react-ga';
 
 export const initGA = () => {
-    ReactGA.initialize('UA-185891429-1');
+    ReactGA.initialize('UA-189709819-1', {
+        gaOptions: {
+            siteSpeedSampleRate: 100
+        },
+        debug: true
+    });
 };
 
 export const logPageView = () => {
