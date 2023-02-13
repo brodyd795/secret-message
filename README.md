@@ -1,12 +1,11 @@
 # Secret Message App
 
-This is a tool designed to allow users to send secret messages to others in a
+## No longer maintained or live
+
+This was a tool designed to allow users to send secret messages to others in a
 secure manner.
 
-Learn more about how this tool works
-[here](https://dingel.dev/secret-message/about).
-
-Use this tool at https://dingel.dev/secret-message.
+View a video walkthrough [here](https://www.loom.com/share/583aa40bacec4257ab2e2cf8596f4885). 
 
 ## Built using:
 
